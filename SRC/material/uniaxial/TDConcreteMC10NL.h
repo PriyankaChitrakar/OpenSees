@@ -95,7 +95,8 @@ class TDConcreteMC10NL : public UniaxialMaterial //ntosic: changed name
 	double getShrinkBasic(void); //Added by AMK //ntosic: split into basic and drying
 	double getShrinkDrying(void); //Added by AMK //ntosic: split into basic and drying
     double getKappa(void);
-    
+    double setEta(double time, double tp); // Priyanka: Added for Secondary Creep
+
     int commitState(void);
     int revertToLastCommit(void);    
     int revertToStart(void);        
@@ -197,6 +198,7 @@ class TDConcreteMC10NL : public UniaxialMaterial //ntosic: changed name
     float TIME_i[5000]; //Time from the previous time step
     float DTIME_i[5000];
     float kappa[5000];
+    float eta_i[5000];  //Priyanka: for Secondary Creep
 };
 
 

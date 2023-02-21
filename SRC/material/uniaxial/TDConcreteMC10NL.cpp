@@ -242,7 +242,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
  
 	for (int i = 1; i<=count; i++) {
                 PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
-                runSum += PHIB_i[i]*DSIG_i[i]/Ecm; //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
+				eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
+                runSum += (PHIB_i[i]*DSIG_i[i]/Ecm)*(1+2*eta_i[i]*pow((DSIG_i[i]/fc),4); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
     }
     
     phib_i = PHIB_i[count];
@@ -261,13 +262,23 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
 
 	for (int i = 1; i <= count; i++) {
 		PHID_i[i] = setPhiDrying(time, TIME_i[i]); //Determine PHI //ntosic: PHID
-		runSum += PHID_i[i] * DSIG_i[i] / Ecm; //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
+		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
+		runSum += (PHIB_i[i] * DSIG_i[i] / Ecm) * (1 + 2 * eta_i[i] * pow((DSIG_i[i] / fc), 4); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 	}
 
 	phid_i = PHID_i[count];
 	creepDrying = runSum;
 	return creepDrying;
 
+}
+//Priyanka: Adding for Secondary Creep
+ double
+TDConcreteMC10NL::setEta(double time, double tp)
+{
+	// Priyanka: Eta for Secondary Creep
+	double tmtp = time - tp;
+	double eta = pow(1.0 -log(tmtp - (100.0 - tmtp)), 0.75);
+	return eta;
 }
 //ntosic
 double
