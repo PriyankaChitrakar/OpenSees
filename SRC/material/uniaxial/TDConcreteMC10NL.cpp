@@ -239,8 +239,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
     double runSum = 0.0;
 	double runSumStress = 0.0;
 
-	cout << "\n          Stress: " << stress << ".";
-	cout << "\n          Time: " << time << ".";
+	cout << "\n  Stress: " << stress << ".";
+	cout << "\n  Time: " << time << ".";
     
     DTIME_i[count] = ops_Dt;
  
@@ -296,7 +296,7 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	cout << "\n          tmtp: " << tmtp << ".";
+	cout << "\n  tmtp: " << tmtp << ".";
 	double tpa = tp * pow(9.0 / (2.0 + pow(tp, 1.2)) + 1.0, cem);
 	double phiBasic = phiba * log(pow(30.0 / tpa + 0.035, 2.0) * (tmtp / phibb) + 1.0);
 	return phiBasic;
