@@ -253,6 +253,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		//runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
 		cout << "\n	         runSum: " << runSum << ".";
+		//cout << "\n	        eps_m: " << eps_m << ".";
     }
     
     phib_i = PHIB_i[count];
@@ -341,6 +342,7 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
+	cout << "\n          trialStrain: " << trialStrain << ".";
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
     double test = 10.0; // 9/13
@@ -424,6 +426,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		//opserr<<"\n   sig = "<<sig;
 	}
     iter ++;
+	cout << "\n          eps_m: " << eps_m << ".";
 	return 0;
 }
 
