@@ -238,22 +238,23 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
     double creepBasic;
     double runSum = 0.0;
 	double runSumStress = 0.0;
+	double ShortTimeStrain = 0.0; //Priyanka
 
-	cout << "\n  Stress: " << stress << ".";
-	cout << "\n  Time: " << time << ".";
+	//cout << "\n  Stress: " << stress << ".";
+	//cout << "\n  Time: " << time << ".";
     
     DTIME_i[count] = ops_Dt;
  
 	for (int i = 1; i<=count; i++) {
         PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
-		cout << "\n          DSIG_i["<<i<<"]: " << DSIG_i[i] << ".";
+		//cout << "\n          DSIG_i["<<i<<"]: " << DSIG_i[i] << ".";
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
-		runSum += (PHIB_i[i]*DSIG_i[i]/Ecm)*(1+2*eta_i[i]*pow((stress/fc),4)); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
+		ShortTimeStrain = setShortTimeStrain(stress); //Priyanka
+		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc),4)); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		//runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
-		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
-		cout << "\n	         runSum: " << runSum << ".";
-		//cout << "\n	        eps_m: " << eps_m << ".";
+		//cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
+		//cout << "\n	         runSum: " << runSum << ".";		
     }
     
     phib_i = PHIB_i[count];
@@ -426,7 +427,6 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		//opserr<<"\n   sig = "<<sig;
 	}
     iter ++;
-	cout << "\n          eps_m: " << eps_m << ".";
 	return 0;
 }
 
@@ -799,9 +799,9 @@ TDConcreteMC10NL::Tens_Envlp (double epsc, double &sigc, double &Ect)
   return;
 }
 
-//ntosic  
+//priyanka
 void
-TDConcreteMC10NL::Compr_Envlp(double epsc, double &sigc, double &Ect)
+TDConcreteMC10NL:: setShortTimeStrain(double stress)
 {
 	//Linear
 	//Ect = Ec;
@@ -824,16 +824,51 @@ TDConcreteMC10NL::Compr_Envlp(double epsc, double &sigc, double &Ect)
 	double Ec0 = Ec; //ntosic
 	double epsc0 = 2.0*fc / Ec0; //ntosic
 
+	double b;
+	double c;
+	double x;
+
+	b = -2 * epsc0;
+	c = (stress/fc)*pow(epsc0,2);
+	x = (-b / 2) + pow(pow(b, 2) - 4 * c), 0.5);
+	return x;
+	}
+
+ //ntosic 
+void
+TDConcreteMC10NL::Compr_Envlp(double epsc, double& sigc, double& Ect)
+{
+	//Linear
+	//Ect = Ec;
+	//sigc = Ect*epsc;
+	//Non-linear with linear softening
+	/*-----------------------------------------------------------------------
+	! monotonic envelope of concrete in compression (negative envelope)
+	!
+	!   fc    = concrete compressive strength
+	!   fcu   = stress at ultimate (crushing) strain
+	!   epscu = ultimate (crushing) strain
+	!   Ec0   = initial concrete tangent modulus
+	!   epsc  = strain
+	!
+	!   returned variables
+	!   sigc  = current stress
+	!   Ect   = tangent concrete modulus
+	-----------------------------------------------------------------------*/
+
+	double Ec0 = Ec; //ntosic
+	double epsc0 = 2.0 * fc / Ec0; //ntosic
+
 	double ratLocal = epsc / epsc0;
 	if (epsc >= epsc0) {
-		sigc = fc * ratLocal*(2.0 - ratLocal);
+		sigc = fc * ratLocal * (2.0 - ratLocal);
 		Ect = Ec0 * (1.0 - ratLocal);
 	}
 	else {
 
 		//   linear descending branch between epsc0 and epscu
 		if (epsc > epscu) {
-			sigc = (fcu - fc)*(epsc - epsc0) / (epscu - epsc0) + fc;
+			sigc = (fcu - fc) * (epsc - epsc0) / (epscu - epsc0) + fc;
 			Ect = (fcu - fc) / (epscu - epsc0);
 		}
 		else {
