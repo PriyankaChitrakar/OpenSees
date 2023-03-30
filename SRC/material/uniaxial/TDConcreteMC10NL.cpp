@@ -831,6 +831,8 @@ TDConcreteMC10NL:: setShortTimeStrain(double stress)
 	double x;
 
 	b = -2 * epsc0;
+	cout << "\n	         b: " << b << ".";
+	cout << "\n	         fc: " << fc << ".";
 	c = (stress/fc)*pow(epsc0,2);
 	x = (-b / 2) + pow((pow(b, 2) - 4 * c), 0.5);
 	return x;
