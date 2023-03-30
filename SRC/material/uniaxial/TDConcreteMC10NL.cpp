@@ -252,7 +252,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 		//cout << "\n	         ShortTimeStrain: " << ShortTimeStrain << ".";
-		cout << "\n	         stress: " << DSIG_i[i] << ".";
+		//cout << "\n	         stress: " << DSIG_i[i] << ".";
 		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc),4)); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		//runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		//cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
