@@ -800,7 +800,7 @@ TDConcreteMC10NL::Tens_Envlp (double epsc, double &sigc, double &Ect)
 }
 
 //priyanka
-void
+double
 TDConcreteMC10NL:: setShortTimeStrain(double stress)
 {
 	//Linear
@@ -830,7 +830,7 @@ TDConcreteMC10NL:: setShortTimeStrain(double stress)
 
 	b = -2 * epsc0;
 	c = (stress/fc)*pow(epsc0,2);
-	x = (-b / 2) + pow(pow(b, 2) - 4 * c), 0.5);
+	x = (-b / 2) + pow((pow(b, 2) - 4 * c), 0.5);
 	return x;
 	}
 
