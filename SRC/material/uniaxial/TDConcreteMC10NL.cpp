@@ -588,7 +588,7 @@ TDConcreteMC10NL::commitState(void)
 	//ntosic: strain compression limit changed to 0.4fc/Ec; Include nonlinear creep coefficient?
     if (eps_m < 0 && fabs(eps_m)>0.40*fabs(fc/Ec)) {
         double s = fabs(eps_m/fc)*Ec;
-		cout<<"\n          Strain Compression Limit Exceeded: "<<s<<"fc'";
+		//cout<<"\n          Strain Compression Limit Exceeded: "<<s<<"fc'"; /////////////////////Priyanka
     }
 		//Cracking flags:
 		crackP_flag = crack_flag;
