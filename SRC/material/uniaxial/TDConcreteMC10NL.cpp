@@ -283,7 +283,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
 		//runSumStress += DSIG_i[i]; // Priyanka: Added for Secondary Creep
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 		runSum += (PHID_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/(fc)),4)); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
-		//runSum += (PHID_i[i] * DSIG_i[i] / Ecm);
+		//runSum += (PHID_i[i] * DSIG_i[i] / Ecm);/
 	}
 
 	phid_i = PHID_i[count];
