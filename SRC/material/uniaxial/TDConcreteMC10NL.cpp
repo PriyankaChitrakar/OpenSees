@@ -287,7 +287,6 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
 		cout << "\n          PHID_i[" << i << "]: " << PHID_i[i] << ".";
 		cout << "\n	         runSum: " << runSum << ".";
 	}
-	}
 
 	phid_i = PHID_i[count];
 	creepDrying = runSum;
