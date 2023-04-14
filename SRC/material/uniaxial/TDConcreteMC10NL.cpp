@@ -317,7 +317,7 @@ TDConcreteMC10NL::setPhiDrying(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	double phiDrying = 0.0; // (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5))* (phida * pow(tmtp / (tmtp + phida), 0.5));
+	double phiDrying = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5))* (phida * pow(tmtp / (tmtp + phida), 0.5));
 	cout << "\n	         phiDrying: " << phiDrying << ".";
 	return phiDrying;
 }
