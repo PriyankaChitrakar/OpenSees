@@ -247,7 +247,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
  
 	for (int i = 1; i<=count; i++) {
         PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
-		//cout << "\n          DSIG_i["<<i<<"]: " << DSIG_i[i] << ".";
+		cout << "\n          DSIG_i["<<i<<"]: " << DSIG_i[i] << ".";
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		//cout << "\n	         stress: " << DSIG_i[i] << ".";
@@ -306,10 +306,8 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	cout << "\n	         tp: " << tp << ".";
 	cout << "\n	         tmtp: " << tmtp << ".";
 	double phiBasic = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / (tmtp + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
-	cout << "\n	         phiBasic: " << phiBasic << ".";
 	return phiBasic;
 }
 //ntosic
