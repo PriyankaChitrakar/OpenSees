@@ -307,6 +307,7 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	double phiBasic = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / (tmtp + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
+	cout << "\n	         phiBasic: " << phiBasic << ".";
 	return phiBasic;
 }
 //ntosic
@@ -316,6 +317,7 @@ TDConcreteMC10NL::setPhiDrying(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	double phiDrying = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * pow(tmtp / (tmtp + phida), 0.5));
+	cout << "\n	         phiDrying: " << phiDrying << ".";
 	return phiDrying;
 }
 //ntosic
