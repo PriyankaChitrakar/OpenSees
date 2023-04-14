@@ -308,7 +308,7 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 	double tmtp = time - tp;
 	cout << "\n	         tmtp: " << tmtp << ".";
 	cout << "\n	         tp: " << tp << ".";
-	double phiBasic = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5));// *((2 * pow(tmtp, 0.3) / (tmtp + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
+	double phiBasic = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) *((2 * pow(tmtp, 0.3) / (tmtp + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
 	return phiBasic;
 }
 //ntosic
