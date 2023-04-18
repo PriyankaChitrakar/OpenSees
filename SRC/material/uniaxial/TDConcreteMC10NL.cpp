@@ -240,14 +240,14 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	///cout << "\n  Stress: " << stress << ".";
-	//cout << "\n  Time: " << time << ".";
+	cout << "\n  Stress: " << stress << ".";
+	cout << "\n  Time: " << time << ".";
     
     DTIME_i[count] = ops_Dt;
  
 	for (int i = 1; i<=count; i++) {
         PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
-		//cout << "\n          DSIG_i["<<i<<"]: " << DSIG_i[i] << ".";
+		cout << "\n          DSIG_i["<<i<<"]: " << DSIG_i[i] << ".";
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		//cout << "\n	         stress: " << DSIG_i[i] << ".";
@@ -255,8 +255,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		//cout << "\n	         ShortTimeStrain: " << ShortTimeStrain << ".";		
 		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc),4)); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
-		//cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
-		//cout << "\n	         runSum: " << runSum << ".";		
+		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
+		cout << "\n	         runSum: " << runSum << ".";		
     }
     
     phib_i = PHIB_i[count];
@@ -308,9 +308,10 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	//cout << "\n	         tmtp: " << tmtp << ".";
-	//cout << "\n	         tp: " << tp << ".";
-	double phiBasic = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) *((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
+	cout << "\n	         tmtp: " << tmtp << ".";
+	cout << "\n	         tp: " << tp << ".";
+	cout << "\n	         time: " << time << ".";
+	double phiBasic = exp(0.125*(1-pow(28/time,0.5)))*(pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) *((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
 	return phiBasic;
 }
 //ntosic
@@ -319,7 +320,7 @@ TDConcreteMC10NL::setPhiDrying(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	double phiDrying = (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * pow(tmtp / (tmtp + phidb), 0.5));
+	double phiDrying = exp(0.125 * (1 - pow(28 / time, 0.5))) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * pow(tmtp / (tmtp + phidb), 0.5));
 	//cout << "\n	         phiDrying: " << phiDrying << ".";
 	return phiDrying;
 }
