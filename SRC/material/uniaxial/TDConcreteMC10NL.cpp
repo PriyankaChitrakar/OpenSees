@@ -240,7 +240,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	//cout << "\n  Stress: " << stress << ".";
+	///cout << "\n  Stress: " << stress << ".";
 	//cout << "\n  Time: " << time << ".";
     
     DTIME_i[count] = ops_Dt;
