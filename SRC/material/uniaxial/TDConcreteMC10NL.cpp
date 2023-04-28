@@ -242,6 +242,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 
 	//cout << "\n  Stress: " << stress << ".";
 	//cout << "\n  Time: " << time << ".";
+	//
     
     DTIME_i[count] = ops_Dt;
  
