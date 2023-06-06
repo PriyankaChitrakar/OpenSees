@@ -390,6 +390,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
             }
 
     	// Calculate creep and mechanical strain, assuming stress remains constant in a time step:
+				cout << "\n          ops_Creep: " << ops_Creep << ".";
     	if (ops_Creep == 1) {
         	if (fabs(t-TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
             	eps_crb = epsP_crb; //ntosic
