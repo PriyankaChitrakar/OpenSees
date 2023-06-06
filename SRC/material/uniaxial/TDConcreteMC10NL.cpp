@@ -240,8 +240,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	//cout << "\n  Stress: " << stress << ".";
-	//cout << "\n  Time: " << time << ".";
+	cout << "\n  Stress: " << stress << ".";
+	cout << "\n  Time: " << time << ".";
 	//
     
     DTIME_i[count] = ops_Dt;
@@ -257,7 +257,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ 1.05 ),4)*(2-1.8*stress / fc/ 1.05 )); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		//cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
-		//cout << "\n	         runSum: " << runSum << ".";		
+		cout << "\n	         runSum: " << runSum << ".";		
     }
     
     phib_i = PHIB_i[count];
@@ -351,7 +351,8 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
-	//cout << "\n          trialStrain: " << trialStrain << ".";
+	cout << "\n          trialStrain: " << trialStrain << ".";
+	cout << "\n          strainRate: " << strainRate << ".";
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
     double test = 10.0; // 9/13
