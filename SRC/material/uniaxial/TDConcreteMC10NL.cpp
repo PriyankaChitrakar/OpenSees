@@ -353,11 +353,15 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
 	cout << "\n          trialStrain: " << trialStrain << ".";
 	//cout << "\n          strainRate: " << strainRate << ".";
+	
+	loop++;
+	cout << "\n          loop: " << loop << ".";
+
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
     double test = 10.0; // 9/13
     double sigI = 0.0;  // 9/13
-    int niter = 5;  // 9/13
+    int niter = 500;  // 9/13
 	
     //opserr<<"\n trialStrain = "<<trialStrain;
     
@@ -414,6 +418,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
         		//	eps_m = eps_total - eps_cr - eps_sh;
         		//	sig = setStress(eps_m, e);
         		//} else {
+				cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
                     eps_crb = setCreepBasicStrain(t,sig); 
 					eps_crd = setCreepDryingStrain(t, sig);
