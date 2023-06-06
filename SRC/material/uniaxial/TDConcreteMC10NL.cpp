@@ -354,8 +354,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 	cout << "\n          trialStrain: " << trialStrain << ".";
 	//cout << "\n          strainRate: " << strainRate << ".";
 	
-	loop++;
 	cout << "\n          loop: " << loop << ".";
+	loop ++ ;
 
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
