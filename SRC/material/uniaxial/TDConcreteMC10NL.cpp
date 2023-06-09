@@ -350,11 +350,11 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
-	cout << "\n          trialStrain: " << trialStrain << ".";
+	//cout << "\n          trialStrain: " << trialStrain << ".";
 	//cout << "\n          strainRate: " << strainRate << ".";
 	
-	cout << "\n          loop: " << loop << ".";
-	loop ++ ;
+	//cout << "\n          loop: " << loop << ".";
+	//loop ++ ;
 
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
@@ -393,7 +393,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
             }
 
     	// Calculate creep and mechanical strain, assuming stress remains constant in a time step:
-				cout << "\n          ops_Creep: " << ops_Creep << ".";
+				//cout << "\n          ops_Creep: " << ops_Creep << ".";
     	if (ops_Creep == 1) {
         	if (fabs(t-TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
             	eps_crb = epsP_crb; //ntosic
@@ -417,7 +417,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
         		//	eps_m = eps_total - eps_cr - eps_sh;
         		//	sig = setStress(eps_m, e);
         		//} else {
-				cout << "\n          iter: " << iter << ".";
+				//cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
                     eps_crb = setCreepBasicStrain(t,sig); 
 					eps_crd = setCreepDryingStrain(t, sig);
