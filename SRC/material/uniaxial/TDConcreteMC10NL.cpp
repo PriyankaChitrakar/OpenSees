@@ -292,7 +292,6 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
 	phid_i = PHID_i[count];
 	creepDrying = runSum;
 	return creepDrying;
-
 }
 //Priyanka: Adding for Secondary Creep
  double
