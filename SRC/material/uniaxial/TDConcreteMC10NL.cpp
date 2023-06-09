@@ -240,8 +240,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	//cout << "\n  Stress: " << stress << ".";
-	//cout << "\n  Time: " << time << ".";
+	cout << "\n  Stress: " << stress << ".";
+	cout << "\n  Time: " << time << ".";
 	//
     
     DTIME_i[count] = ops_Dt;
@@ -257,7 +257,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ 1.05 ),4)*(2-1.8*stress / fc/ 1.05 )); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		//cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
-		//cout << "\n	         runSum: " << runSum << ".";		
+		cout << "\n	         runSum: " << runSum << ".";		
     }
     
     phib_i = PHIB_i[count];
@@ -350,7 +350,12 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
-	//cout << "\n          trialStrain: " << trialStrain << ".";
+	cout << "\n          trialStrain: " << trialStrain << ".";
+	//cout << "\n          strainRate: " << strainRate << ".";
+	
+	cout << "\n          loop: " << loop << ".";
+	loop ++ ;
+
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
     double test = 10.0; // 9/13
@@ -388,6 +393,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
             }
 
     	// Calculate creep and mechanical strain, assuming stress remains constant in a time step:
+				cout << "\n          ops_Creep: " << ops_Creep << ".";
     	if (ops_Creep == 1) {
         	if (fabs(t-TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
             	eps_crb = epsP_crb; //ntosic
@@ -411,6 +417,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
         		//	eps_m = eps_total - eps_cr - eps_sh;
         		//	sig = setStress(eps_m, e);
         		//} else {
+				cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
                     eps_crb = setCreepBasicStrain(t,sig); 
 					eps_crd = setCreepDryingStrain(t, sig);
