@@ -361,6 +361,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
     double test = 10.0; // 9/13
     double sigI = 0.0;  // 9/13
     int niter = 500;  // 9/13
+
+	double ShortTimeStrainD = 0.0; //Priyanka
 	
     //opserr<<"\n trialStrain = "<<trialStrain;
     
@@ -423,7 +425,13 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					eps_crd = setCreepDryingStrain(t, sig);
 				}
         		eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
-        		sig = setStress(eps_m, e);
+				sig = setStress(eps_m, e);
+
+				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
+				if (eps_total< setShortTimeStrainD)
+				{
+					eps_total = setShortTimeStrainD
+				}
 				//}
         	}
     	} else { //Static Analysis using previously converged time-dependent strains
@@ -856,6 +864,42 @@ TDConcreteMC10NL:: setShortTimeStrain(double stress)
 	x = (-b / 2) + pow((pow(b, 2) - 4 * c), 0.5)/2;
 	return x;
 	}
+
+//priyanka
+double
+TDConcreteMC10NL::setShortTimeStrainD(double stress)
+{
+	//Linear
+	//Ect = Ec;
+	//sigc = Ect*epsc;
+	//Non-linear with linear softening
+	/*-----------------------------------------------------------------------
+	! monotonic envelope of concrete in compression (negative envelope)
+	!
+	!   fc    = concrete compressive strength
+	!   fcu   = stress at ultimate (crushing) strain
+	!   epscu = ultimate (crushing) strain
+	!   Ec0   = initial concrete tangent modulus
+	!   epsc  = strain
+	!
+	!   returned variables
+	!   sigc  = current stress
+	!   Ect   = tangent concrete modulus
+	-----------------------------------------------------------------------*/
+
+	double Ec0 = Ec; //ntosic
+	double epsc0 = 2.0 * fc / Ec0; //ntosic
+
+	double b;
+	double c;
+	double x;
+
+	b = (epsc0 - epscu) / (fc - fcu);
+	c = (epsc0 - ((epsc0 - epscu) / (fc - fcu)) * fc);
+	x = (stress - c) / m;
+
+	return x;
+}
 
  //ntosic 
 void

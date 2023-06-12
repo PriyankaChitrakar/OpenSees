@@ -97,6 +97,7 @@ class TDConcreteMC10NL : public UniaxialMaterial //ntosic: changed name
     double getKappa(void);
     double setEta(double time, double tp); // Priyanka: Added for Secondary Creep
     double setShortTimeStrain(double stress);// Priyanka: Added for Secondary Creep
+    double setShortTimeStrainD(double stress);// Priyanka: Added for Secondary Creep :Declining portion
 
     int commitState(void);
     int revertToLastCommit(void);    
