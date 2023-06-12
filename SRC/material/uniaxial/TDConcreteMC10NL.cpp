@@ -428,9 +428,9 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				sig = setStress(eps_m, e);
 
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
-				if (eps_total< setShortTimeStrainD)
+				if (eps_total < setShortTimeStrainD)
 				{
-					eps_total = setShortTimeStrainD
+					eps_total = setShortTimeStrainD;
 				}
 				//}
         	}
@@ -867,7 +867,7 @@ TDConcreteMC10NL:: setShortTimeStrain(double stress)
 
 //priyanka
 double
-TDConcreteMC10NL::setShortTimeStrainD(double stress)
+TDConcreteMC10NL:: setShortTimeStrainD(double stress)
 {
 	//Linear
 	//Ect = Ec;
