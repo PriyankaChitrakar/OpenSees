@@ -240,8 +240,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	cout << "\n  Stress: " << stress << ".";
-	cout << "\n  Time: " << time << ".";
+	cout << "\n    Stress: " << stress << ".";
+	cout << "\n    Time: " << time << ".";
 	//
     
     DTIME_i[count] = ops_Dt;
@@ -351,10 +351,10 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
-	cout << "\n          trialStrain: " << trialStrain << ".";
+	cout << "\n trialStrain: " << trialStrain << ".";
 	//cout << "\n          strainRate: " << strainRate << ".";
 	
-	cout << "\n          loop: " << loop << ".";
+	cout << "\n loop: " << loop << ".";
 	loop ++ ;
 
 	double t = getCurrentTime();
