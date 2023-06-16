@@ -427,11 +427,13 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				}
         		eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
 				sig = setStress(eps_m, e);
+				cout << "\n          sig: " << sig << ".";
 
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
 				cout << "\n          eps_total: " << eps_total << ".";
 				cout << "\n          ShortTimeStrainD: " << ShortTimeStrainD << ".";
 				if (eps_total < ShortTimeStrainD)
+
 				{
 					eps_total = ShortTimeStrainD;
 				}
