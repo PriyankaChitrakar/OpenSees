@@ -247,18 +247,18 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
     DTIME_i[count] = ops_Dt;
  
 	for (int i = 1; i<=count; i++) {
-		cout << "\n	         i: " << i << ".";
-		cout << "\n	     count: " << count << ".";
+		//cout << "\n	         i: " << i << ".";
+		//cout << "\n	     count: " << count << ".";
         PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
-		cout << "\n	         ShortTimeStrain: " << ShortTimeStrain << ".";		
+		cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";		
 		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ 1.05 ),4)*(2-1.8*stress / fc/ 1.05 )); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
-		cout << "\n	         runSum: " << runSum << ".";		
+		cout << "\n	                      runSum: " << runSum << ".";		
     }
     
     phib_i = PHIB_i[count];
@@ -427,11 +427,12 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				}
         		eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
 				sig = setStress(eps_m, e);
-				cout << "\n          sig: " << sig << ".";
+				cout << "\n      eps_m: " << eps_m << ".";
+				cout << "\n      sig: " << sig << ".";
 
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
-				cout << "\n          eps_total: " << eps_total << ".";
-				cout << "\n          ShortTimeStrainD: " << ShortTimeStrainD << ".";
+				cout << "\n      eps_total: " << eps_total << ".";
+				cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
 				if (eps_total < ShortTimeStrainD)
 
 				{
