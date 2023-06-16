@@ -263,6 +263,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
     
     phib_i = PHIB_i[count];
     creepBasic = runSum;
+	cout << "\n	         creepBasic: " << creepBasic << ".";
     return creepBasic;
     
 }
@@ -292,6 +293,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
 
 	phid_i = PHID_i[count];
 	creepDrying = runSum;
+	cout << "\n	         creepDrying: " << creepDrying << ".";
 	return creepDrying;
 }
 //Priyanka: Adding for Secondary Creep
