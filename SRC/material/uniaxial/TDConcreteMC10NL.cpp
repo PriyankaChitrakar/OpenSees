@@ -407,7 +407,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				eps_shd = epsP_shd; //ntosic
             	eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
             	sig = setStress(eps_m, e);
-				cout << "\n      PATH 0";
+				cout << "\n      PATH 3";
             
         	} else { // if the current calculation is a new time step
         		//if (crackP_flag == 1 && sigP >= 0.0) { //if cracking occurs and previous stress is positive, 
@@ -452,6 +452,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				eps_shd = epsP_shd; //ntosic
             	eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
     	        sig = setStress(eps_m, e);
+				cout << "\n      PATH 4";
     	}
 		//
 		//opserr<<"\n   eps_cr = "<<eps_cr;
