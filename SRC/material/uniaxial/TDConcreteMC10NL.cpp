@@ -240,8 +240,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	cout << "\n    Stress: " << stress << ".";
-	cout << "\n    Time: " << time << ".";
+	///cout << "\n    Stress: " << stress << ".";
+	///cout << "\n    Time: " << time << ".";
 	//
     
     DTIME_i[count] = ops_Dt;
@@ -251,19 +251,19 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		//cout << "\n	     count: " << count << ".";
         PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
-		cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
-		cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
+		///cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
+		///cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
-		cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";		
+		///cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";		
 		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ 1.05 ),4)*(2-1.8*stress / fc/ 1.05 )); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
-		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
-		cout << "\n	                      runSumBasic: " << runSum << ".";		
+		///cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
+		///cout << "\n	                      runSumBasic: " << runSum << ".";		
     }
     
     phib_i = PHIB_i[count];
     creepBasic = runSum;
-	cout << "\n	         creepBasic: " << creepBasic << ".";
+	///cout << "\n	         creepBasic: " << creepBasic << ".";
     return creepBasic;
     
 }
@@ -288,7 +288,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
 		runSum += (PHID_i[i]* ShortTimeStrain)*(1+2*eta_i[i]* pow((stress / fc / 1.05), 4) * (2 - 1.8 * stress / fc / 1.05)); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 		//runSum += (PHID_i[i] * DSIG_i[i] / Ecm);
 		//cout << "\n          PHID_i[" << i << "]: " << PHID_i[i] << ".";
-		cout << "\n	         runSumDrying: " << runSum << ".";
+		///cout << "\n	         runSumDrying: " << runSum << ".";
 	}
 
 	phid_i = PHID_i[count];
@@ -324,7 +324,7 @@ TDConcreteMC10NL::setPhiDrying(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	double phiDrying = exp(0.125 * (1 - pow(28 / time, 0.5))) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * pow(tmtp / (tmtp + phidb), 0.5));
-	cout << "\n	         phiDrying: " << phiDrying << ".";
+	///cout << "\n	         phiDrying: " << phiDrying << ".";
 	return phiDrying;
 }
 //ntosic
@@ -353,10 +353,10 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
-	cout << "\n trialStrain: " << trialStrain << ".";
+	///cout << "\n trialStrain: " << trialStrain << ".";
 	//cout << "\n          strainRate: " << strainRate << ".";
 	
-	cout << "\n loop: " << loop << ".";
+	///cout << "\n loop: " << loop << ".";
 	loop ++ ;
 
 	double t = getCurrentTime();
@@ -398,7 +398,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
             }
 
     	// Calculate creep and mechanical strain, assuming stress remains constant in a time step:
-				cout << "\n          ops_Creep: " << ops_Creep << ".";
+				///cout << "\n          ops_Creep: " << ops_Creep << ".";
     	if (ops_Creep == 1) {
         	if (fabs(t-TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
             	eps_crb = epsP_crb; //ntosic
@@ -407,7 +407,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				eps_shd = epsP_shd; //ntosic
             	eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
             	sig = setStress(eps_m, e);
-				cout << "\n      PATH 3";
+				///cout << "\n      PATH 3";
             
         	} else { // if the current calculation is a new time step
         		//if (crackP_flag == 1 && sigP >= 0.0) { //if cracking occurs and previous stress is positive, 
@@ -423,21 +423,21 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
         		//	eps_m = eps_total - eps_cr - eps_sh;
         		//	sig = setStress(eps_m, e);
         		//} else {
-				cout << "\n          iter: " << iter << ".";
+				///cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
                     eps_crb = setCreepBasicStrain(t,sig); 
 					eps_crd = setCreepDryingStrain(t, sig);
-					cout << "\n      PATH 1";
+					///cout << "\n      PATH 1";
 				}
         		eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
 				sig = setStress(eps_m, e);
-				cout << "\n      eps_m: " << eps_m << ".";
-				cout << "\n      sig: " << sig << ".";
-				cout << "\n      PATH 2";
+				///cout << "\n      eps_m: " << eps_m << ".";
+				///cout << "\n      sig: " << sig << ".";
+				///cout << "\n      PATH 2";
 
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
-				cout << "\n      eps_total: " << eps_total << ".";
-				cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
+				///cout << "\n      eps_total: " << eps_total << ".";
+				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
 				if (eps_total < ShortTimeStrainD)
 
 				{
@@ -453,7 +453,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				eps_shd = epsP_shd; //ntosic
             	eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
     	        sig = setStress(eps_m, e);
-				cout << "\n      PATH 4";
+				///cout << "\n      PATH 4";
     	}
 		//
 		//opserr<<"\n   eps_cr = "<<eps_cr;
