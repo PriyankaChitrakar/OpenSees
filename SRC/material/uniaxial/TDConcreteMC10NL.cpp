@@ -858,7 +858,7 @@ TDConcreteMC10NL:: setShortTimeStrain(double stress)
 	-----------------------------------------------------------------------*/
 
 	double Ec0 = Ec; //ntosic
-	double epsc0 = 0.002 * phibb ; //Priyanka////phibb=k; for the time being 1/3
+	double epsc0 = -0.002 * phibb ; //Priyanka////phibb=k; for the time being 1/3
 
 	double b;
 	double c;
@@ -902,7 +902,7 @@ TDConcreteMC10NL:: setShortTimeStrainD(double stress)
 	-----------------------------------------------------------------------*/
 
 	double Ec0 = Ec; //ntosic
-	double epsc0 = 0.002 * phibb; //Priyanka////phibb=k; for the time being 2/3
+	double epsc0 = -0.002 * phibb; //Priyanka////phibb=k; for the time being 2/3
 
 	double b;
 	double c;
@@ -938,7 +938,7 @@ TDConcreteMC10NL::Compr_Envlp(double epsc, double& sigc, double& Ect)
 	-----------------------------------------------------------------------*/
 
 	double Ec0 = Ec; //ntosic
-	double epsc0 = 0.002 * phibb; //Priyanka////phibb=k; for the time being 3/3
+	double epsc0 = -0.002 * phibb; //Priyanka////phibb=k; for the time being 3/3
 
 	double ratLocal = epsc / epsc0;
 	if (epsc >= epsc0) {
