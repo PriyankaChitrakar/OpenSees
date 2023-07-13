@@ -844,7 +844,7 @@ TDConcreteMC10NL::Tens_Envlp (double epsc, double &sigc, double &Ect)
       Ect  = 1.0e-10;
       sigc = 1.0e-10;
     }
-    */
+    
     
   return;
 }
