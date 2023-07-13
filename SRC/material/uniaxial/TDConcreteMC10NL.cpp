@@ -804,7 +804,7 @@ TDConcreteMC10NL::Tens_Envlp (double epsc, double &sigc, double &Ect)
 !    sigc  = stress corresponding to eps
 !    Ect  = tangent concrete modulus
 !-----------------------------------------------------------------------*/
-  
+  /* Priyanka
 	double Ec0 = Ec;
 	double eps0 = ft / Ec0;
 	double epsu = ft * (1.0 / Ets + 1.0 / Ec0);
@@ -824,6 +824,20 @@ TDConcreteMC10NL::Tens_Envlp (double epsc, double &sigc, double &Ect)
   //Ect = Ec0;
    /*
     if (epsc<=epsu) {
+      Ect  = -Ets;
+      sigc = ft-Ets*(epsc-eps0);
+    } else {
+      Ect  = 1.0e-10;
+      sigc = 1.0e-10;
+    }
+    */
+
+	double Ec0 = Ec;
+	double eps0 = ft / Ec0;
+	double epsu = ft * (1.0 / Ets + 1.0 / Ec0);
+	Ets = ft / 0.002;
+	
+	if (epsc <= eps0) {	
       Ect  = -Ets;
       sigc = ft-Ets*(epsc-eps0);
     } else {
