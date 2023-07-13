@@ -834,19 +834,24 @@ TDConcreteMC10NL::Tens_Envlp (double epsc, double &sigc, double &Ect)
 
 	double Ec0 = Ec;
 	double eps0 = ft / Ec0;
-	double Ets;
 	Ets = ft / 0.002;
 	double epsu = ft * (1.0 / Ets + 1.0 / Ec0);
-	
-	
-	if (epsc <= eps0) {	
-      Ect  = -Ets;
-      sigc = ft-Ets*(epsc-eps0);
-    } else {
-      Ect  = 1.0e-10;
-      sigc = 1.0e-10;
-    }
-    
+		
+	if (epsc <= eps0) {
+		sigc = epsc * Ec0;
+		Ect = Ec0;
+	}
+	else {
+		if (epsc <= epsu) {
+			Ect = -Ets;
+			sigc = ft - Ets * (epsc - eps0);
+		}
+		else {
+			Ect = 1.0e-10;
+			sigc = 1.0e-10;
+		}
+	}
+	     
     
   return;
 }
