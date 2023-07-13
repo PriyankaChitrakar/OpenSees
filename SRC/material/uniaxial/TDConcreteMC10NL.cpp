@@ -820,6 +820,7 @@ TDConcreteMC10NL::Tens_Envlp (double epsc, double &sigc, double &Ect)
 	}
    
   //THiS IS FOR TESTING LINEAR
+
   //sigc = epsc*Ec0;
   //Ect = Ec0;
    /*
