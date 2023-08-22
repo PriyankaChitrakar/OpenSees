@@ -438,7 +438,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
 				///cout << "\n      eps_total: " << eps_total << ".";
 				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
-				if (eps_total < ((ShortTimeStrainD + 0.002) * (-0.0106667 / (epscu + 0.002)) -0.0013333 - 0.002))
+				if (eps_total < ((ShortTimeStrainD + 0.002) * 3.137 -0.0033333))
 				//if (eps_total < ((ShortTimeStrainD + 0.002) * (-0.008 / (epscu + 0.002)) - 0.001 - 0.002))
 
 				{
