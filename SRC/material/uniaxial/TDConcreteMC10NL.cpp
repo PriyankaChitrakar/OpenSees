@@ -240,7 +240,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	///cout << "\n    Stress: " << stress << ".";
+	cout << "\n    Stress: " << stress << ".";
 	///cout << "\n    Time: " << time << ".";
 	//
     
@@ -335,9 +335,9 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	//cout << "\n	         tmtp: " << tmtp << ".";
-	//cout << "\n	         tp: " << tp << ".";
-	//cout << "\n	         time: " << time << ".";
+	cout << "\n	         tmtp: " << tmtp << ".";
+	cout << "\n	         tp: " << tp << ".";
+	cout << "\n	         time: " << time << ".";
 	double phiBasic = exp(0.125*(1-pow(28/time,0.5)))*(pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) *((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
 	return phiBasic;
 }
@@ -459,7 +459,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				///cout << "\n      sig: " << sig << ".";
 				///cout << "\n      PATH 2";
 								
-				cout << "\n a_i[i] : " << a_i[i] << ".";
+				///cout << "\n a_i[i] : " << a_i[i] << ".";
 
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
 				///cout << "\n      eps_total: " << eps_total << ".";
