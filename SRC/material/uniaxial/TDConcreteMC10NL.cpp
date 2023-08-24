@@ -242,7 +242,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 
 	cout << "\n    Stress: " << stress << ".";
 	cout << "\n    Time: " << time << ".";
-	//
+
     
     DTIME_i[count] = ops_Dt;
  
@@ -462,6 +462,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
 				///cout << "\n      eps_total: " << eps_total << ".";
+				int i = 1;//Priyanka
+				cout << "\n          TIME_i[" << i << "]: " << TIME_i[i] << ".";//Priyanka
 				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
 				if (eps_total < ((ShortTimeStrainD + 0.002) * 3.137 -0.0033333))
 				//if (eps_total < ((ShortTimeStrainD + 0.002) * (-0.008 / (epscu + 0.002)) - 0.001 - 0.002))
