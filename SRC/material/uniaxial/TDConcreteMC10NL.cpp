@@ -464,10 +464,25 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				///cout << "\n      eps_total: " << eps_total << ".";
 				int i = 1;//Priyanka
 				cout << "\n          TIME_i[" << i << "]: " << TIME_i[i] << ".";//Priyanka
-				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
-				if (eps_total < ((ShortTimeStrainD + 0.002) * 3.137 -0.0033333))
-				//if (eps_total < ((ShortTimeStrainD + 0.002) * (-0.008 / (epscu + 0.002)) - 0.001 - 0.002))
+				cout << "\n          t: " << t << ".";//Priyanka
 
+				// Priyanka: for Secondary Creep
+				double tmtp = time - tp;
+				double a;
+				if (tmtp < 3)
+				{
+					a = tmtp / 3;
+				}
+				else
+				{
+					a = 1;
+				}
+				cout << "\n          a: " << a << ".";//Priyanka
+				// Priyanka: for Secondary Creep
+				
+				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
+				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137*a+1) -0.0033333*a))
+				
 				{
 					//eps_total = ShortTimeStrainD;
 					//eps_total = epscu;
