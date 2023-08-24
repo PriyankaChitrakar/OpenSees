@@ -467,7 +467,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				cout << "\n          t: " << t << ".";//Priyanka
 
 				// Priyanka: for Secondary Creep
-				double tmtp = time - tp;
+				double tmtp = t - TIME_i[i];
 				double a;
 				if (tmtp < 3)
 				{
