@@ -256,8 +256,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 		///cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";		
 		a_i[i] = setValueOFa(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
-		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
-		runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1)), 4) * (2 - 1.8 * stress / fc / (1)));
+		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		//runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		///cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
 		///cout << "\n	                      runSumBasic: " << runSum << ".";		
@@ -288,9 +287,12 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
 		//runSumStress += DSIG_i[i]; // Priyanka: Added for Secondary Creep
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 		a_i[i] = setValueOFa(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
-		//runSum += (PHID_i[i]* ShortTimeStrain)*(1+2*eta_i[i]* pow((stress / fc/(1+0.1* a_i[i])), 4) * (2 - 1.8 * stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
-		runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1)), 4) * (2 - 1.8 * stress / fc / (1)));
-		
+
+		cout << "\n 1.a_i[i] : " << a_i[i] << ".";
+
+
+		runSum += (PHID_i[i]* ShortTimeStrain)*(1+2*eta_i[i]* pow((stress / fc/(1+0.1* a_i[i])), 4) * (2 - 1.8 * stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
+				
 		//runSum += (PHID_i[i] * DSIG_i[i] / Ecm);
 		//cout << "\n          PHID_i[" << i << "]: " << PHID_i[i] << ".";
 		///cout << "\n	         runSumDrying: " << runSum << ".";
@@ -456,6 +458,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				///cout << "\n      eps_m: " << eps_m << ".";
 				///cout << "\n      sig: " << sig << ".";
 				///cout << "\n      PATH 2";
+								
+				cout << "\n a_i[i] : " << a_i[i] << ".";
 
 				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
 				///cout << "\n      eps_total: " << eps_total << ".";
