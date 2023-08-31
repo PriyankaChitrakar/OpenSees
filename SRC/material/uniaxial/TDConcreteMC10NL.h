@@ -76,8 +76,8 @@ class TDConcreteMC10NL : public UniaxialMaterial //ntosic: changed name
     UniaxialMaterial *getCopy(void);
 
     int setTrialStrain(double strain, double strainRate = 0.0); 
-	double setCreepBasicStrain(double time, double stress); //Added by AMK //ntosic: split into basic and drying creep
-	double setCreepDryingStrain(double time, double stress); //Added by AMK //ntosic: split into basic and drying creep
+	double setCreepBasicStrain(double time, double stress, double eo); //Added by AMK //ntosic: split into basic and drying creep//Edited Priyanka
+	double setCreepDryingStrain(double time, double stress, double eo); //Added by AMK //ntosic: split into basic and drying creep//Edited Priyanka
     double setStress(double strain, double &stiff); //Added by AMK
 	double getCurrentTime(void); //Added by AMK
     double getStrain(void);

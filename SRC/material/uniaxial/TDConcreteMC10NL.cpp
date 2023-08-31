@@ -233,7 +233,7 @@ TDConcreteMC10NL::getCurrentTime(void)
 }	
 //ntosic
 double
-TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
+TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 {
     double creepBasic;
     double runSum = 0.0;
@@ -242,6 +242,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 
 	//cout << "\n    Stress: " << stress << ".";
 	//cout << "\n    Time: " << time << ".";
+	cout << "\n    eo: " << eo << ".";
 
     
     DTIME_i[count] = ops_Dt;
@@ -254,7 +255,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 		///cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		///cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
-		///cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";	
+		cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";	
 		
 		a_i[i] = setValueOFa(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n				1.a_i[" << i << "] : " << a_i[i] << ".";
@@ -272,7 +273,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress)
 }
 //ntosic
 double
-TDConcreteMC10NL::setCreepDryingStrain(double time, double stress)
+TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 {
 	double creepDrying;
 	double runSum = 0.0;
@@ -448,8 +449,10 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
         		//} else {
 				///cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
-                    eps_crb = setCreepBasicStrain(t,sig); 
-					eps_crd = setCreepDryingStrain(t, sig);
+					double e_o = eps_total - epsP_crb - epsP_crd - epsP_shb - epsP_shd;
+
+                    eps_crb = setCreepBasicStrain(t,sig,e_o);
+					eps_crd = setCreepDryingStrain(t, sig,e_o);
 					///cout << "\n      PATH 1";
 				}
         		eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
