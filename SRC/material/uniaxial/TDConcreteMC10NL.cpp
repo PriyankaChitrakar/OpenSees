@@ -309,9 +309,9 @@ TDConcreteMC10NL::setValueOFa(double time, double tp)
 	// Priyanka: for Secondary Creep
 	double tmtp = time - tp;
 	double a;
-	if (tmtp < 0.17)
+	if (tmtp < 0.0000000001)
 	{
-		a = tmtp / 0.17;
+		a = tmtp / 0.0000000001;
 	}
 	else 
 	{ 
