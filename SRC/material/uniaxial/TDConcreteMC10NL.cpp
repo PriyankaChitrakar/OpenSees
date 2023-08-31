@@ -309,9 +309,9 @@ TDConcreteMC10NL::setValueOFa(double time, double tp)
 	// Priyanka: for Secondary Creep
 	double tmtp = time - tp;
 	double a;
-	if (tmtp < 0.00001)
+	if (tmtp < 0.17)
 	{
-		a = tmtp / 0.00001;
+		a = tmtp / 0.17;
 	}
 	else 
 	{ 
@@ -469,9 +469,9 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				// Priyanka: for Secondary Creep
 				double tmtp = t - TIME_i[i];
 				double a;
-				if (tmtp < 0.00001)
+				if (tmtp < 0.17)
 				{
-					a = tmtp / 0.00001;
+					a = tmtp / 0.17;
 				}
 				else
 				{
