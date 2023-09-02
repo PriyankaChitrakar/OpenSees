@@ -492,6 +492,11 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					//eps_total = epscu;
 					sig = fcu;					
 				}
+				else if (eps_m < -0.002)
+				{
+					sig = fcu;
+				}
+
 				//}
         	}
     	} else { //Static Analysis using previously converged time-dependent strains
