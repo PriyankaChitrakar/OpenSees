@@ -240,8 +240,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	cout << "\n    Stress: " << stress << ".";
-	cout << "\n    Time: " << time << ".";
+	//cout << "\n    Stress: " << stress << ".";
+	//cout << "\n    Time: " << time << ".";
 	//cout << "\n    eo: " << eo << ".";
 
     
@@ -251,25 +251,24 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//cout << "\n	         i: " << i << ".";
 		//cout << "\n	     count: " << count << ".";
         PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
-		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
+		//cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
-		cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
+		//cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 		//cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";	
 		
 		a_i[i] = setValueOFa(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n				1.a_i[" << i << "] : " << a_i[i] << ".";
-		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
+		runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		//runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 )), 4) * (2 - 1.8 * stress / fc / (1 + 0.1))); //Priyanka: Edited for ///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
-		runSum += PHIB_i[i] * DSIG_i[i] / Ecm;
-		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << ".";
-		cout << "\n	                      runSumBasic: " << runSum << ".";		
+		//runSum += PHIB_i[i] * DSIG_i[i] / Ecm;
+		//cout << "\n	                      runSumBasic: " << runSum << ".";		
     }
     
     phib_i = PHIB_i[count];
     creepBasic = runSum;
-	cout << "\n	         creepBasic: " << creepBasic << ".";
+	//cout << "\n	         creepBasic: " << creepBasic << ".";
     return creepBasic;
     
 }
@@ -301,8 +300,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 	}
 
 	phid_i = PHID_i[count];
-	//creepDrying = runSum;
-	creepDrying = 0.0;
+	creepDrying = runSum;
 	///cout << "\n	         creepDrying: " << creepDrying << ".";
 	return creepDrying;
 }
@@ -338,9 +336,9 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	cout << "\n	         tmtp: " << tmtp << ".";
-	cout << "\n	         tp: " << tp << ".";
-	cout << "\n	         time: " << time << ".";
+	//cout << "\n	         tmtp: " << tmtp << ".";
+	//cout << "\n	         tp: " << tp << ".";
+	//cout << "\n	         time: " << time << ".";
 	double phiBasic = exp(0.125*(1-pow(28/time,0.5)))*(pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) *((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
 	return phiBasic;
 }
