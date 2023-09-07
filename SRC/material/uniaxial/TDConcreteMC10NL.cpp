@@ -494,7 +494,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				}
 				else if (eps_m < -0.002)
 				{
-					sig = fcu;
+					eps_total = ShortTimeStrainD;
 				}
 
 				//}
