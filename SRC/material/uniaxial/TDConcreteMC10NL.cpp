@@ -379,11 +379,12 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
-	///cout << "\n trialStrain: " << trialStrain << ".";
+	cout << "\n trialStrain: " << trialStrain << ".";
 	//cout << "\n          strainRate: " << strainRate << ".";
 	
-	///cout << "\n loop: " << loop << ".";
+	
 	loop ++ ;
+	cout << "\n loop: " << loop << ".";
 
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
@@ -427,13 +428,16 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				///cout << "\n          ops_Creep: " << ops_Creep << ".";
     	if (ops_Creep == 1) {
         	if (fabs(t-TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
+
+				cout << "\n      PATH 3";
+
             	eps_crb = epsP_crb; //ntosic
 				eps_crd = epsP_crd; //ntosic
             	eps_shb = epsP_shb; //ntosic
 				eps_shd = epsP_shd; //ntosic
             	eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
             	sig = setStress(eps_m, e);
-				///cout << "\n      PATH 3";
+				
             
         	} else { // if the current calculation is a new time step
         		//if (crackP_flag == 1 && sigP >= 0.0) { //if cracking occurs and previous stress is positive, 
@@ -451,17 +455,23 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
         		//} else {
 				///cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
+
+					cout << "\n      PATH 1";
 					double e_o = epsP_total - epsP_crb - epsP_crd - epsP_shb - epsP_shd;
 
                     eps_crb = setCreepBasicStrain(t,sig,e_o);
 					eps_crd = setCreepDryingStrain(t, sig,e_o);
-					///cout << "\n      PATH 1";
+					
 				}
+
+				cout << "\n      PATH 2";
+
         		eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
 				sig = setStress(eps_m, e);
-				///cout << "\n      eps_m: " << eps_m << ".";
-				///cout << "\n      sig: " << sig << ".";
-				///cout << "\n      PATH 2";
+				
+				cout << "\n      eps_m: " << eps_m << ".";
+				cout << "\n      sig: " << sig << ".";
+				
 								
 				///cout << "\n a_i[i] : " << a_i[i] << ".";
 
@@ -509,7 +519,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				eps_shd = epsP_shd; //ntosic
             	eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
     	        sig = setStress(eps_m, e);
-				///cout << "\n      PATH 4";
+				
+				cout << "\n      PATH 4";
     	}
 		//
 		//opserr<<"\n   eps_cr = "<<eps_cr;
