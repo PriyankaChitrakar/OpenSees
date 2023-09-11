@@ -405,8 +405,11 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
     }
     */
 	
+	cout << "\n      t= " << t << ".";
+
 	// Check casting age:
 	if (t-tcast<(2.0-0.0001)) { //Assumed that concrete can only carry load once hardened at 2 days following casting
+		cout << "\n      PATH 0";
 		eps_crb = 0.0; //ntosic
 		eps_crd = 0.0; //ntosic
 		eps_shb = 0.0; //ntosic
