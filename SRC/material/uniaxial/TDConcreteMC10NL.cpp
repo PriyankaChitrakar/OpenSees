@@ -384,7 +384,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 	
 	
 	loop ++ ;
-	cout << "\n loop: " << loop << ".";
+	cout << "\n     loop: " << loop << ".";
 
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
@@ -396,7 +396,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 	
     //opserr<<"\n trialStrain = "<<trialStrain;
     
-	// Need to initialize count and initial stress/strain:
+	// Need to init      ialize count and initial stress/strain:
     /*
     if (ops_Creep == 0) {
 		count = 0;
@@ -409,7 +409,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 	// Check casting age:
 	if (t-tcast<(2.0-0.0001)) { //Assumed that concrete can only carry load once hardened at 2 days following casting
-		cout << "\n      PATH 0";
+		cout << "\nPATH 0";
 		eps_crb = 0.0; //ntosic
 		eps_crd = 0.0; //ntosic
 		eps_shb = 0.0; //ntosic
