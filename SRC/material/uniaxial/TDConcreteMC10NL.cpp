@@ -379,13 +379,13 @@ TDConcreteMC10NL::setShrinkDrying(double time)
 int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
+	loop++;
+	cout << "\n------LOOP: " << loop << "---------------------";
+
+
 	cout << "\n trialStrain: " << trialStrain << ".";
 	//cout << "\n          strainRate: " << strainRate << ".";
 	
-	
-	loop ++ ;
-	cout << "\n     loop: " << loop << ".";
-
 	double t = getCurrentTime();
     double tol = 1.e-4; // 9/13
     double test = 10.0; // 9/13
@@ -532,6 +532,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		//opserr<<"\n   sig = "<<sig;
 	}
     iter ++;
+	cout << "\n          iter: " << iter << ".";//Priyanka
 	return 0;
 }
 
