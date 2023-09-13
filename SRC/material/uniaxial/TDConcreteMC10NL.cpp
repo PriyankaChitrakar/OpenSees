@@ -469,8 +469,13 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				}
 
 				cout << "\n        PATH 2";
+				cout << "\n        eps_m: " << eps_m << ".";
+				if (eps_m < -0.002) { eps_m = eps_total } //Priyanka
 
-        		eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
+				else {
+					eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic} //Priyanka
+
+        		
 				sig = setStress(eps_m, e);
 				
 				
