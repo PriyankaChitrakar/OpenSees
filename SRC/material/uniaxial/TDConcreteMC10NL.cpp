@@ -257,12 +257,12 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 
-		/*
+		
 		if (eps_m < -0.002) 
 		{ 
 			ShortTimeStrain = Deps_m_i[i];
 		} //Priyanka
-		*/
+		
 
 
 		cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";	
