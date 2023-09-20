@@ -256,6 +256,14 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
+
+		if (eps_m < -0.002) 
+		{ 
+			ShortTimeStrain = Deps_m_i[i];
+		} //Priyanka
+
+
+
 		//cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";	
 		
 		a_i[i] = setValueOFa(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
@@ -406,7 +414,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
     */
 	
 	cout << "\n        t= " << t << ".";
-	cout << "\n        sig: " << sig << ".";
+	cout << "\n        previous sig: " << sig << ".";
 
 	// Check casting age:
 	if (t-tcast<(2.0-0.0001)) { //Assumed that concrete can only carry load once hardened at 2 days following casting
@@ -469,7 +477,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				}
 
 				cout << "\n        PATH 2";
-				cout << "\n        eps_m: " << eps_m << ".";
+				cout << "\n        previous eps_m: " << eps_m << ".";
 						
 					eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
 					sig = setStress(eps_m, e);
@@ -527,9 +535,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		//opserr<<"\n   eps_m = "<<eps_m;
 		//opserr<<"\n   sig = "<<sig;
 	}
-	
-	cout << "\n        sig: " << sig << ".";
 	cout << "\n        eps_m: " << eps_m << ".";
+	cout << "\n        sig: " << sig << ".";
 	cout << "\n		   eps_total: " << eps_total << ".";
 	cout << "\n        iter: " << iter << ".";//Priyanka
 	iter++;
@@ -663,6 +670,7 @@ TDConcreteMC10NL::commitState(void)
   //	DSIG_i[count+1] = sig-sigP;
   //}
   DSIG_i[count+1] = sig-sigP;
+  Deps_m_i[count + 1] = eps_m - epsP_m;
   
   //Secant Stiffness for determination of creep strain:
       if (fabs(eps_m/sig)>Ec) {  //ntosic: originally was eps_m/sig
