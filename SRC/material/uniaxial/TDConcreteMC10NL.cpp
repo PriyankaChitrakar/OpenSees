@@ -256,6 +256,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
+		cout << "\n          eps_m_i[" << i << "]: " << eps_m[i] << ".";
 
 		cout << "\n	         eo: " << eo << ".";
 		if (eo < -0.002) 
@@ -673,6 +674,7 @@ TDConcreteMC10NL::commitState(void)
   //}
   DSIG_i[count+1] = sig-sigP;
   Deps_m_i[count + 1] = eps_m - epsP_m;
+  eps_m_i[count + 1] = eps_m ;
   
   //Secant Stiffness for determination of creep strain:
       if (fabs(eps_m/sig)>Ec) {  //ntosic: originally was eps_m/sig
