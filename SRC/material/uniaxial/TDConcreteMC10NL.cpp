@@ -259,7 +259,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		
 
 		//#cout << "\n	         eo: " << eo << ".";
-		if (eo < -0.002) 
+		if (eo < cem * phibb ) 
 		{		
 			ShortTimeStrain = 0.0;
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
