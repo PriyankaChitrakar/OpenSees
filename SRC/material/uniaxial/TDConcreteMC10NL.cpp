@@ -1054,21 +1054,23 @@ TDConcreteMC10NL::Compr_Envlp(double epsc, double& sigc, double& Ect)
 	!   sigc  = current stress
 	!   Ect   = tangent concrete modulus
 	-----------------------------------------------------------------------*/
-
+	double epsc01 = cem;
+	double epsc02 = epsc01 * phibb; //Priyanka////phibb=k; 
+	double kfc = fc * phibb;
 	double Ec0 = Ec; //ntosic
-	double epsc0 = -0.002 * phibb; //Priyanka////phibb=k; for the time being 3/3
+	
 
 	double ratLocal = epsc / epsc0;
-	if (epsc >= epsc0) {
-		sigc = fc * ratLocal * (2.0 - ratLocal);
+	if (epsc >= epsc02) {
+		sigc = kfc * ratLocal * (2.0 - ratLocal);
 		Ect = Ec0 * (1.0 - ratLocal);
 	}
 	else {
 
 		//   linear descending branch between epsc0 and epscu
 		if (epsc > epscu) {
-			sigc = (fcu - fc) * (epsc - epsc0) / (epscu - epsc0) + fc;
-			Ect = (fcu - fc) / (epscu - epsc0);
+			sigc = (fcu - kfc) * (epsc - epsc02) / (epscu - epsc02) + kfc;
+			Ect = (fcu - kfc) / (epscu - epsc02);
 		}
 		else {
 
