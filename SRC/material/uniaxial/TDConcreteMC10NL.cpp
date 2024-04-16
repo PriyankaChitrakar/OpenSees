@@ -974,24 +974,24 @@ TDConcreteMC10NL:: setShortTimeStrain(double stress)
 	-----------------------------------------------------------------------*/
 
 	double Ec0 = Ec; //ntosic
-	double epsc01 = cem;
-	double epsc02 = epsc01 * phibb ; //Priyanka////phibb=k; for the time being 1/3
+	
+	double epsc0 = cem * phibb ; //Priyanka////phibb=k; for the time being 1/3
 	double kfc = fc * phibb;
 
 	double b;
 	double c;
 	double x;
 
-	b = -2 * epsc02;
+	b = -2 * epsc0;
 	//cout << "\n	         b: " << b << ".";
 	//cout << "\n	         fc: " << fc << ".";
 	if (stress < 0)
 	{
-		c = (stress / kfc) * pow(epsc02, 2);
+		c = (stress / kfc) * pow(epsc0, 2);
 	}
 	else
 	{
-		c = (-stress / kfc) * pow(epsc02, 2);
+		c = (-stress / kfc) * pow(epsc0, 2);
 	}
 	x = (-b / 2) + pow((pow(b, 2) - 4 * c), 0.5)/2;
 	return x;
