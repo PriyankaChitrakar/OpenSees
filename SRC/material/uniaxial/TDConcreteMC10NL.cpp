@@ -1055,8 +1055,8 @@ TDConcreteMC10NL::Compr_Envlp(double epsc, double& sigc, double& Ect)
 	!   Ect   = tangent concrete modulus
 	-----------------------------------------------------------------------*/
 	double epsc0 = cem;
-	double epsc02 = epsc01 * phibb; //Priyanka////phibb=k; 
-	double kfc = fc * phibb;
+	//double epsc02 = epsc01 * phibb; //Priyanka////phibb=k; 
+	//double kfc = fc * phibb;
 	double Ec0 = Ec; //ntosic
 	
 
