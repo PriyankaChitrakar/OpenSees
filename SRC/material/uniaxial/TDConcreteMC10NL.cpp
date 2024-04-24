@@ -530,7 +530,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				{
 					//eps_total = ShortTimeStrainD;
 					//eps_total = epscu;
-					sig = fcu;					
+					sig = 3.0*fcu;					
 				}
 			
 
