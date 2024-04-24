@@ -524,13 +524,14 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				
 				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
 				//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137*a+1) -0.0013333*a-0.002))
-				//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1)  - 0.002))
-				if (eps_total < -0.0025)
+				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1)  - 0.002))
+				//if (eps_total < -0.0025)
 				
 				{
 					//eps_total = ShortTimeStrainD;
 					//eps_total = epscu;
-					sig = 3.0*fcu;					
+					double R = eps_total - ShortTimeStrainD;
+					sig = setStressF(eps_total,R);
 				}
 			
 
@@ -559,6 +560,23 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 	iter++;
 	return 0;
 }
+//Priyanka
+
+double
+TDConcreteMC10NL::setStressF(double eps_total, double R)
+{
+	double x =0.0;
+	double y = eps_total;
+	double a = fc ;
+	double b = R + cem ;
+	double c = fcu;
+	double d = R + epscu ;
+
+	x = a + (y - b) * (c - a) / (a - b);
+	return x;
+}
+
+
 
 double
 TDConcreteMC10NL::setStress(double strain, double &stiff)
