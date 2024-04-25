@@ -579,7 +579,7 @@ TDConcreteMC10NL::setStressF(double eps_total, double R)
 	double c = 0.95*fc;
 	double d = 2 * cem;
 
-	x = a + (y - b) * (c - a) / (a - b);
+	x = a + (y - b) * (c - a) / (d - b);
 	return x;
 }
 
