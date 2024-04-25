@@ -565,12 +565,19 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 double
 TDConcreteMC10NL::setStressF(double eps_total, double R)
 {
-	double x =0.0;
+	/*double x = 0.0;
 	double y = eps_total;
 	double a = fc ;
 	double b = R + cem ;
 	double c = fcu;
-	double d = R + epscu ;
+	double d = R + epscu ;*/
+
+	double x = 0.0;
+	double y = eps_total;
+	double a = 1.1*fc;
+	double b = cem;
+	double c = 0.95*fc;
+	double d = 2 * cem;
 
 	x = a + (y - b) * (c - a) / (a - b);
 	return x;
