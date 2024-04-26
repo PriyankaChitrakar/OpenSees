@@ -511,11 +511,11 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				// Priyanka: for Secondary Creep
 				double tmtp = t - TIME_i[i];
 				double a;
-				/*if (tmtp < 0.17)
+				if (tmtp < 0.17)
 				{
 					a = tmtp / 0.17;
 				}
-				else*/
+				else
 				{
 					a = 1;
 				}
@@ -523,16 +523,15 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				// Priyanka: for Secondary Creep
 				
 				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
-				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137*a+1) -0.00013333*a-0.002))  /// try with decreased z
-				//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.0013333 * a - 0.002))
-				//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1)  - 0.002))
+				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) -  0.0013333 * a - 0.002)); 
 				//if (eps_total < -0.0025)
 				
 				{
 					//eps_total = ShortTimeStrainD;
 					//eps_total = epscu;
-					double R = eps_total - ShortTimeStrainD;
-					sig = setStressF(eps_total,R);
+					//double R = eps_total - ShortTimeStrainD;
+					//sig = setStressF(eps_total,R);
+					sig = fcu;
 				}
 			
 
@@ -561,7 +560,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 	iter++;
 	return 0;
 }
-//Priyanka
+/*Priyanka
 
 double
 TDConcreteMC10NL::setStressF(double eps_total, double R)
@@ -573,7 +572,7 @@ TDConcreteMC10NL::setStressF(double eps_total, double R)
 	double c = fcu;
 	double d = R + epscu ;*/
 
-	double x = 0.0;
+	/*double x = 0.0;
 	double y = eps_total;
 	double a = 1.1*fc;
 	double b = cem;
@@ -582,7 +581,7 @@ TDConcreteMC10NL::setStressF(double eps_total, double R)
 
 	x = a + (y - b) * (c - a) / (d - b);
 	return x;
-}
+}*/
 
 
 
