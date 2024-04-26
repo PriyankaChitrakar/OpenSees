@@ -523,7 +523,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				// Priyanka: for Secondary Creep
 				
 				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
-				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137*a+1) -0.0013333*a-0.002))
+				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137*a+1) -0.00013333*a-0.002))
+				//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.0013333 * a - 0.002))
 				//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1)  - 0.002))
 				//if (eps_total < -0.0025)
 				
