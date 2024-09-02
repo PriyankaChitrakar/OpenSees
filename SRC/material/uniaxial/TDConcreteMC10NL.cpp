@@ -939,7 +939,7 @@ TDConcreteMC10NL::Tens_Envlp(double epsc, double& sigc, double& Ect)
 
 	double Ec0 = Ec;
 	double eps0 = ft / Ec0;
-	Ets = ft / 0.002;
+	Ets = ft / 0.004; // priyanka
 	double epsu = ft * (1.0 / Ets + 1.0 / Ec0);
 
 	if (epsc <= eps0) {
