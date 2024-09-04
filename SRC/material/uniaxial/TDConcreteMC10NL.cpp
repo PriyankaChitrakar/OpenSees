@@ -259,7 +259,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 
 
 		//#cout << "\n	         eo: " << eo << ".";
-		if (eo < cem * phibb)
+		if (eo < cem * 1.0) //phibb=k=1 / 1 of 7
 		{
 			ShortTimeStrain = 0.0;
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
@@ -304,7 +304,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 		//runSumStress += DSIG_i[i]; // Priyanka: Added for Secondary Creep
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 
-		if (eo < cem * phibb)
+		if (eo < cem * 1.0) //phibb=k=1 2 of 7
 		{
 			ShortTimeStrain = 0.0;
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
@@ -939,7 +939,7 @@ TDConcreteMC10NL::Tens_Envlp(double epsc, double& sigc, double& Ect)
 
 	double Ec0 = Ec;
 	double eps0 = ft / Ec0;
-	Ets = ft / 0.004; // priyanka
+	Ets = ft / phibb; // priyanka  // phibb is a factor to modify Ets
 	double epsu = ft * (1.0 / Ets + 1.0 / Ec0);
 
 	if (epsc <= eps0) {
@@ -985,8 +985,8 @@ TDConcreteMC10NL::setShortTimeStrain(double stress)
 
 	double Ec0 = Ec; //ntosic
 
-	double epsc0 = cem * phibb; //Priyanka////phibb=k; for the time being 1/3
-	double kfc = fc * phibb;
+	double epsc0 = cem * 1.0; //Priyanka////phibb=k; for the time being 1/3  // //phibb=k=1   /3 of 7
+	double kfc = fc * 1.0;                                                       //phibb=k=1  /4 of 7
 
 	double b;
 	double c;
@@ -1030,7 +1030,7 @@ TDConcreteMC10NL::setShortTimeStrainD(double stress)
 	-----------------------------------------------------------------------*/
 
 	double Ec0 = Ec; //ntosic
-	double epsc0 = -0.002 * phibb; //Priyanka////phibb=k; for the time being 2/3
+	double epsc0 = cem * 1.0; //Priyanka////phibb=k; for the time being 2/3   //phibb=k=1  5 of 7
 
 	double b;
 	double c;
@@ -1065,8 +1065,8 @@ TDConcreteMC10NL::Compr_Envlp(double epsc, double& sigc, double& Ect)
 	!   Ect   = tangent concrete modulus
 	-----------------------------------------------------------------------*/
 	double epsc01 = cem;
-	double epsc0 = epsc01 * phibb; //Priyanka////phibb=k; 
-	double kfc = fc * phibb;
+	double epsc0 = epsc01 * 1.0; //Priyanka////phibb=k;   //phibb=k=1  /6 of 7
+	double kfc = fc * 1.0;                                //phibb=k=1  /7 of 7
 	double Ec0 = Ec; //ntosic
 
 
