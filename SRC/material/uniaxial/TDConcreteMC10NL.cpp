@@ -363,7 +363,7 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 	//#cout << "\n	         tmtp: " << tmtp << ".";
 	//#cout << "\n	         tp: " << tp << ".";
 	//#cout << "\n	         time: " << time << ".";
-	double phiBasic = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.01) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.01)));
+	double phiBasic = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
 	return phiBasic;
 }
 //ntosic
