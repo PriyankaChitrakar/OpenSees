@@ -939,7 +939,7 @@ TDConcreteMC10NL::Tens_Envlp(double epsc, double& sigc, double& Ect)
 
 	double Ec0 = Ec;
 	double eps0 = ft / Ec0;
-	Ets = ft / phibb; // priyanka  // phibb is a factor to modify Ets
+	Ets = phibb; // priyanka  // phibb is a factor to modify Ets
 	double epsu = ft * (1.0 / Ets + 1.0 / Ec0);
 
 	if (epsc <= eps0) {
