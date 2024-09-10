@@ -274,7 +274,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		double x = 2.6;
 		double y = 2.6;
-		runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 3));
+		runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 0.7 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 2));
 		//runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 4) * (x - y * stress / fc / (1 + 0.1))); //Priyanka: Edited for ///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		// += PHIB_i[i] * DSIG_i[i] / Ecm;
 		//#cout << "\n	                      runSumBasic: " << runSum << ".";		
@@ -316,7 +316,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 
 		double x = 2.6;
 		double y = 2.6;
-		runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 * a_i[i])), 3));
+		runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 0.7 * eta_i[i] * pow((stress / fc / (1 + 0.1 * a_i[i])), 2));
 		//runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 * a_i[i])), 4) * (x - y * stress / fc / (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 		//runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 )), 4) * (2 - 1.8 * stress / fc / (1 + 0.1))); //Priyanka: Edited for		
 		//runSum += (PHID_i[i] * DSIG_i[i] / Ecm);
@@ -375,7 +375,7 @@ TDConcreteMC10NL::setPhiDrying(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	//double phiDrying = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * pow(tmtp / (tmtp + phidb), 0.5));
-	double phiDrying = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida *0.75* pow(tmtp, 0.4) / pow(tmtp + phidb, 0.5));
+	double phiDrying = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida *1.5* pow(tmtp, 0.3) / pow(tmtp + phidb, 0.5));
 	///cout << "\n	         phiDrying: " << phiDrying << ".";
 	return phiDrying;
 }
