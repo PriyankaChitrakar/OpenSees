@@ -735,7 +735,7 @@ TDConcreteMC10::Tens_Envlp (double epsc, double &sigc, double &Ect)
 	double ystrain = ft/Ec;
 	double SH = beta;
 	// USE THIS ONE
-	if (epsc <= ystraina) {
+	if (epsc <= ystrain) {
 		sigc = epsc * Ec;
 	}
 	else {
