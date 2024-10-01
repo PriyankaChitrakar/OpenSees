@@ -730,18 +730,15 @@ TDConcreteMC10::Tens_Envlp (double epsc, double &sigc, double &Ect)
 !    Ect  = tangent concrete modulus
 !-----------------------------------------------------------------------*/
   
-	double Ec0 = Ec;
-	double eps0 = ft / Ec0;
-	double epsu = ft * (1.0 / Ets + 1.0 / Ec0);
-	double b = beta;
+	double ystrain = ft/Ec;
+	double SH = beta;
 	// USE THIS ONE
-	if (epsc <= eps0) {
-		sigc = epsc * Ec0;
-		Ect = Ec0;
+	if (epsc <= ystraina) {
+		sigc = epsc * Ec;
 	}
 	else {
 		Ect = -b * eps0*ft / pow(epsc, 2)*pow(eps0 / epsc, b - 1.0);
-		sigc = ft * pow(eps0 / epsc, b);
+		sigc = ft + (SH* Ec)*(epsc - ystrain);
 	}
 
 	//THiS IS FOR TESTING LINEAR

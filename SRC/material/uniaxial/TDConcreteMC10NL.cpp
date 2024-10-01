@@ -507,7 +507,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				///cout << "\n a_i[i] : " << a_i[i] << ".";
 
-				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
+				ShortTimeStrainD1. = setShortTimeStrainD(sig); //Priyanka
 				///cout << "\n      eps_total: " << eps_total << ".";
 				int i = 1;//Priyanka
 				//cout << "\n          TIME_i[" << i << "]: " << TIME_i[i] << ".";//Priyanka
