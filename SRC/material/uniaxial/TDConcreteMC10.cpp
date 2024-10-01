@@ -243,7 +243,6 @@ TDConcreteMC10::setCreepBasicStrain(double time, double stress)
     
     phib_i = PHIB_i[count];
     creepBasic = runSum;
-	creepBasic = 0.0; //Priyanka
     return creepBasic;
     
 }
@@ -262,8 +261,7 @@ TDConcreteMC10::setCreepDryingStrain(double time, double stress)
 	}
 
 	phid_i = PHID_i[count];
-	creepDrying = runSum;
-	creepDrying = 0.0; //Priyanka
+	creepDrying = runSum;	
 	return creepDrying;
 
 }
@@ -274,7 +272,8 @@ TDConcreteMC10::setPhiBasic(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	double tpa = tp * pow(9.0 / (2.0 + pow(tp, 1.2)) + 1.0, cem);
-	double phiBasic = phiba * log(pow(30.0 / tpa + 0.035, 2.0) * (tmtp / phibb) + 1.0);
+	double phiBasic = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
+	//double phiBasic = phiba * log(pow(30.0 / tpa + 0.035, 2.0) * (tmtp / phibb) + 1.0);
 	return phiBasic;
 }
 //ntosic
@@ -284,7 +283,8 @@ TDConcreteMC10::setPhiDrying(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	double tpa = tp * pow(9.0 / (2.0 + pow(tp, 1.2)) + 1.0, cem);
-	double phiDrying = phida / (0.1 + pow(tpa,0.2)) * pow(tmtp, 1.0 / (2.3 + 3.5 / pow(tpa, 0.5))) / pow(phidb + tmtp, 1.0 / (2.3 + 3.5/pow(tpa,0.5)));
+	double phiDrying = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * 1.5 * pow(tmtp, 0.3) / pow(tmtp + phidb, 0.5));
+	//double phiDrying = phida / (0.1 + pow(tpa,0.2)) * pow(tmtp, 1.0 / (2.3 + 3.5 / pow(tpa, 0.5))) / pow(phidb + tmtp, 1.0 / (2.3 + 3.5/pow(tpa,0.5)));
 	return phiDrying;
 }
 //ntosic
