@@ -243,6 +243,7 @@ TDConcreteMC10::setCreepBasicStrain(double time, double stress)
     
     phib_i = PHIB_i[count];
     creepBasic = runSum;
+	creepBasic = 0.0; //Priyanka
     return creepBasic;
     
 }
@@ -262,6 +263,7 @@ TDConcreteMC10::setCreepDryingStrain(double time, double stress)
 
 	phid_i = PHID_i[count];
 	creepDrying = runSum;
+	creepDrying = 0.0; //Priyanka
 	return creepDrying;
 
 }
@@ -737,7 +739,7 @@ TDConcreteMC10::Tens_Envlp (double epsc, double &sigc, double &Ect)
 		sigc = epsc * Ec;
 	}
 	else {
-		Ect = -b * eps0*ft / pow(epsc, 2)*pow(eps0 / epsc, b - 1.0);
+		
 		sigc = ft + (SH* Ec)*(epsc - ystrain);
 	}
 
