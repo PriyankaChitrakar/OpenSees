@@ -406,10 +406,9 @@ int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
 	loop++;
-	//#cout << "\nLOOP:" << loop << "-------------------------------------------------------------------------------------";
+	#cout << "\nLOOP:" << loop << "-------------------------------------------------------------------------------------";//decipher
 
-
-	//#cout << "\n        trialStrain: " << trialStrain << ".";
+	#cout << "\n        trialStrain: " << trialStrain << "."; //decipher
 	//cout << "\n          strainRate: " << strainRate << ".";
 
 	double t = getCurrentTime();
@@ -436,7 +435,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 	// Check casting age:
 	if (t - tcast < (2.0 - 0.0001)) { //Assumed that concrete can only carry load once hardened at 2 days following casting
-		//#cout << "\n        PATH 0";
+		#cout << "\n        PATH 0"; //decipher
 		eps_crb = 0.0; //ntosic
 		eps_crd = 0.0; //ntosic
 		eps_shb = 0.0; //ntosic
@@ -456,11 +455,11 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		}
 
 		// Calculate creep and mechanical strain, assuming stress remains constant in a time step:
-				///cout << "\n          ops_Creep: " << ops_Creep << ".";
+				cout << "\n          ops_Creep: " << ops_Creep << "."; //decipher
 		if (ops_Creep == 1) {
 			if (fabs(t - TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
 
-				//#cout << "\n        PATH 3";
+				#cout << "\n        PATH 3"; //decipher
 
 				eps_crb = epsP_crb; //ntosic
 				eps_crd = epsP_crd; //ntosic
@@ -488,7 +487,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				///cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
 
-					//#cout << "\n        PATH 1";
+					#cout << "\n        PATH 1"; //decipher
 					double e_o = eps_m;
 
 					eps_crb = setCreepBasicStrain(t, sig, e_o);
@@ -496,7 +495,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				}
 
-				//#cout << "\n        PATH 2";
+				#cout << "\n        PATH 2"; //decipher
 				//#cout << "\n        previous eps_m: " << eps_m << ".";
 
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
@@ -548,7 +547,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 			eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
 			sig = setStress(eps_m, e);
 
-			//#cout << "\n        PATH 4";
+			#cout << "\n        PATH 4"; //decipher
 		}
 		//
 		//opserr<<"\n   eps_cr = "<<eps_cr;
@@ -556,8 +555,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		//opserr<<"\n   eps_m = "<<eps_m;
 		//opserr<<"\n   sig = "<<sig;
 	}
-	//#cout << "\n        eps_m: " << eps_m << ".";
-	//#cout << "\n        sig: " << sig << ".";
+	#cout << "\n        eps_m: " << eps_m << "."; //decipher
+	#cout << "\n        sig: " << sig << "."; //decipher
 	//#cout << "\n		   eps_total: " << eps_total << ".";
 	//#cout << "\n        iter: " << iter << ".";//Priyanka
 	iter++;
