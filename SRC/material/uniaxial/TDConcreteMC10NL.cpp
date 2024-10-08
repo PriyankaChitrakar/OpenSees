@@ -240,23 +240,23 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
-	cout << "\n	         setCreepBasicStrain----------------------------------------------";//decipher
+	//cout << "\n	         setCreepBasicStrain----------------------------------------------";//deci
 
-	cout << "\n    Stress: " << stress << ".";//decipher
-	cout << "\n    Time: " << time << ".";//decipher
+	//cout << "\n    Stress: " << stress << ".";//deci
+	//cout << "\n    Time: " << time << ".";//deci
 	//cout << "\n    eo: " << eo << ".";
 
 
 	DTIME_i[count] = ops_Dt;
 
 	for (int i = 1; i <= count; i++) {
-		cout << "\n	         i: " << i << "."; //decipher
-		cout << "\n	     count: " << count << ".";//decipher
+		//cout << "\n	         i: " << i << "."; //deci
+		//cout << "\n	     count: " << count << ".";//deci
 		PHIB_i[i] = setPhiBasic(time, TIME_i[i]); //Determine PHI //ntosic: PHIB
-		cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << "."; //decipher
+		//cout << "\n          PHIB_i[" << i << "]: " << PHIB_i[i] << "."; //deci
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
-		cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";//decipher
+		//cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";//deci
 		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
 
 
@@ -276,10 +276,10 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		double x = 2.6;
 		double y = 2.6;
-		//runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 0.7 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 2));// //decipher -to be used
+		runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 0.7 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 2));// //deci
 		//runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 4) * (x - y * stress / fc / (1 + 0.1))); //Priyanka: Edited for ///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
-		runSum += PHIB_i[i] * DSIG_i[i] / Ecm;//decipher
-		cout << "\n	                      runSumBasic: " << runSum << ".";	//decipher
+		//runSum += PHIB_i[i] * DSIG_i[i] / Ecm;//deci
+		//cout << "\n	                      runSumBasic: " << runSum << ".";	//deci
 	}
 
 	phib_i = PHIB_i[count];
@@ -364,10 +364,10 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 {
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
-	cout << "\n	         setPhiBasic----------------------------------------------";//decipher
-	cout << "\n	         time: " << time << ".";//decipher
-	cout << "\n	         tp: " << tp << ".";//decipher
-	cout << "\n	         tmtp: " << tmtp << ".";//decipher
+	//cout << "\n	         setPhiBasic----------------------------------------------";//deci
+	//cout << "\n	         time: " << time << ".";//deci
+	//cout << "\n	         tp: " << tp << ".";//deci
+	//cout << "\n	         tmtp: " << tmtp << ".";//deci
 	
 	
 	double phiBasic = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
@@ -411,9 +411,9 @@ int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
 	loop++;
-	cout << "\nLOOP:" << loop << "-------------------------------------------------------------------------------------";//decipher
+	//cout << "\nLOOP:" << loop << "-------------------------------------------------------------------------------------";//deci
 
-	cout << "\n        trialStrain: " << trialStrain << "."; //decipher
+	//cout << "\n        trialStrain: " << trialStrain << "."; //deci
 	//cout << "\n          strainRate: " << strainRate << ".";
 
 	double t = getCurrentTime();
@@ -440,7 +440,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 	// Check casting age:
 	if (t - tcast < (2.0 - 0.0001)) { //Assumed that concrete can only carry load once hardened at 2 days following casting
-		cout << "\n        PATH 0"; //decipher
+		//cout << "\n        PATH 0"; //deci
 		eps_crb = 0.0; //ntosic
 		eps_crd = 0.0; //ntosic
 		eps_shb = 0.0; //ntosic
@@ -464,7 +464,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		if (ops_Creep == 1) {
 			if (fabs(t - TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
 
-				cout << "\n        PATH 3"; //decipher
+				//cout << "\n        PATH 3"; //deci
 
 				eps_crb = epsP_crb; //ntosic
 				eps_crd = epsP_crd; //ntosic
@@ -492,15 +492,15 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				///cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
 
-					cout << "\n        PATH 1"; //decipher
+					//cout << "\n        PATH 1"; //deci
 					double e_o = eps_m;
 
 					eps_crb = setCreepBasicStrain(t, sig, e_o);
-					//eps_crd = setCreepDryingStrain(t, sig, e_o);//decipher
+					eps_crd = setCreepDryingStrain(t, sig, e_o);//deci
 
 				}
 
-				cout << "\n        PATH 2"; //decipher
+				//cout << "\n        PATH 2"; //deci
 				//#cout << "\n        previous eps_m: " << eps_m << ".";
 
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
@@ -552,7 +552,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 			eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
 			sig = setStress(eps_m, e);
 
-			cout << "\n        PATH 4"; //decipher
+			//cout << "\n        PATH 4"; //deci
 		}
 		//
 		//opserr<<"\n   eps_cr = "<<eps_cr;
@@ -560,8 +560,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		//opserr<<"\n   eps_m = "<<eps_m;
 		//opserr<<"\n   sig = "<<sig;
 	}
-	cout << "\n        eps_m: " << eps_m << "."; //decipher
-	cout << "\n        sig: " << sig << "."; //decipher
+	//cout << "\n        eps_m: " << eps_m << "."; //deci
+	//cout << "\n        sig: " << sig << "."; //deci
 	//#cout << "\n		   eps_total: " << eps_total << ".";
 	//#cout << "\n        iter: " << iter << ".";//Priyanka
 	iter++;
