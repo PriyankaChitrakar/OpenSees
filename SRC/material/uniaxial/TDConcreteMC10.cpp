@@ -257,7 +257,7 @@ TDConcreteMC10::setCreepDryingStrain(double time, double stress)
 	DTIME_i[count] = ops_Dt;
 
 	for (int i = 1; i <= count; i++) {
-		if (SIG_i[i] >= ft) { float SIG_i[i] = ft }
+		if (SIG_i[i] >= ft) {SIG_i[i] = ft }
 		PHID_i[i] = setPhiDrying(time, TIME_i[i]); //Determine PHI //ntosic: PHID
 		runSum += (PHID_i[i] + 1) * ((SIG_i[i] / Ecm) - (SIG_i[i] / Ec); //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 	}
