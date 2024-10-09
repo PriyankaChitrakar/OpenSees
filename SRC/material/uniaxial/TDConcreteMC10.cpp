@@ -237,8 +237,9 @@ TDConcreteMC10::setCreepBasicStrain(double time, double stress)
     DTIME_i[count] = ops_Dt;
  
 	for (int i = 1; i<=count; i++) {
+		if (SIG_i[i] >= ft) { SIG_i[i] = ft}
                 PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
-                runSum += PHIB_i[i]*DSIG_i[i]/Ecm; //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
+                runSum += (PHIB_i[i]+1)*((SIG_i[i] /Ecm)- (SIG_i[i] / Ec); //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
     }
     
     phib_i = PHIB_i[count];
@@ -256,8 +257,9 @@ TDConcreteMC10::setCreepDryingStrain(double time, double stress)
 	DTIME_i[count] = ops_Dt;
 
 	for (int i = 1; i <= count; i++) {
+		if (SIG_i[i] >= ft) { float SIG_i[i] = ft }
 		PHID_i[i] = setPhiDrying(time, TIME_i[i]); //Determine PHI //ntosic: PHID
-		runSum += PHID_i[i] * DSIG_i[i] / Ecm; //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
+		runSum += (PHID_i[i] + 1) * ((SIG_i[i] / Ecm) - (SIG_i[i] / Ec); //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 	}
 
 	phid_i = PHID_i[count];
@@ -526,6 +528,7 @@ TDConcreteMC10::commitState(void)
   //	DSIG_i[count+1] = sig-sigP;
   //}
   DSIG_i[count+1] = sig-sigP;
+  SIG_i[count + 1] = sig;
   
   //Secant Stiffness for determination of creep strain:
       if (fabs(eps_m/sig)>Ec) { //ntosic: originally was eps_m/sig

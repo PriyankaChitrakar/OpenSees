@@ -193,6 +193,7 @@ class TDConcreteMC10 : public UniaxialMaterial //ntosic: changed name
 	float PHID_i[5000]; //ntosic: split into basic and drying creep
     float E_i[5000];
     float DSIG_i[5000];
+    float SIG_i[5000];
     float dsig_i[5000];
     float TIME_i[5000]; //Time from the previous time step
     float DTIME_i[5000];
