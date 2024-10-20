@@ -746,7 +746,7 @@ TDConcreteMC10::Tens_Envlp (double epsc, double &sigc, double &Ect)
 	else {
 		
 		sigc = ft + (Sh*Ecm)*(epsc - ystrain);
-		out << "\n	     Ecm: " << Ecm << ".";//Priyanka
+		cout << "\n	     Ecm: " << Ecm << ".";//Priyanka
 	}
 
 	//THiS IS FOR TESTING LINEAR
