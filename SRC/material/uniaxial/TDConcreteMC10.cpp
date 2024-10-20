@@ -239,7 +239,7 @@ TDConcreteMC10::setCreepBasicStrain(double time, double stress)
 	for (int i = 1; i<=count; i++) {
 		if (SIG_i[i] >= ft) { SIG_i[i] = ft; }
                 PHIB_i[i] = setPhiBasic(time,TIME_i[i]); //Determine PHI //ntosic: PHIB
-                runSum += (PHIB_i[i]+1)*(((SIG_i[i] /Ecm)- (SIG_i[i] / Ec))- ((SIG_i[i-1] / Ecm) - (SIG_i[i-1] / Ec))); //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
+                runSum += PHIB_i[i]*(((SIG_i[i] /Ec)- (SIG_i[i] / Ecm))- ((SIG_i[i-1] / Ec) - (SIG_i[i-1] / Ecm))); //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
     }
     
     phib_i = PHIB_i[count];
@@ -259,7 +259,7 @@ TDConcreteMC10::setCreepDryingStrain(double time, double stress)
 	for (int i = 1; i <= count; i++) {
 		if (SIG_i[i] >= ft) { SIG_i[i] = ft; }
 		PHID_i[i] = setPhiDrying(time, TIME_i[i]); //Determine PHI //ntosic: PHID
-		runSum += (PHID_i[i] + 1) * (((SIG_i[i] / Ecm) - (SIG_i[i] / Ec)) - ((SIG_i[i - 1] / Ecm) - (SIG_i[i - 1] / Ec))); //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
+		runSum += PHID_i[i]  * (((SIG_i[i] / Ec) - (SIG_i[i] / Ecm)) - ((SIG_i[i - 1] / Ec) - (SIG_i[i - 1] / Ecm))); //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 	}
 
 	phid_i = PHID_i[count];
@@ -274,7 +274,7 @@ TDConcreteMC10::setPhiBasic(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	double tpa = tp * pow(9.0 / (2.0 + pow(tp, 1.2)) + 1.0, cem);
-	double phiBasic = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
+	double phiBasic = (Ec / Ec) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5))); //(Ec/Ec)
 	//double phiBasic = phiba * log(pow(30.0 / tpa + 0.035, 2.0) * (tmtp / phibb) + 1.0);
 	return phiBasic;
 }
@@ -285,7 +285,7 @@ TDConcreteMC10::setPhiDrying(double time, double tp)
 	// ntosic: Model Code 2010 Equations
 	double tmtp = time - tp;
 	double tpa = tp * pow(9.0 / (2.0 + pow(tp, 1.2)) + 1.0, cem);
-	double phiDrying = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * 1.5 * pow(tmtp, 0.3) / pow(tmtp + phidb, 0.5));
+	double phiDrying = (Ec / Ec) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * 1.5 * pow(tmtp, 0.3) / pow(tmtp + phidb, 0.5)); //(Ec/Ec)
 	//double phiDrying = phida / (0.1 + pow(tpa,0.2)) * pow(tmtp, 1.0 / (2.3 + 3.5 / pow(tpa, 0.5))) / pow(phidb + tmtp, 1.0 / (2.3 + 3.5/pow(tpa,0.5)));
 	return phiDrying;
 }
@@ -736,14 +736,15 @@ TDConcreteMC10::Tens_Envlp (double epsc, double &sigc, double &Ect)
 !-----------------------------------------------------------------------*/
   
 	double ystrain = ft/Ec;
-	double SH = beta;
+	double Sh = beta;
+
 	// USE THIS ONE
 	if (epsc <= ystrain) {
 		sigc = epsc * Ec;
 	}
 	else {
 		
-		sigc = ft + (SH* Ec)*(epsc - ystrain);
+		sigc = ft + (Sh*Ecm)*(epsc - ystrain);
 	}
 
 	//THiS IS FOR TESTING LINEAR
