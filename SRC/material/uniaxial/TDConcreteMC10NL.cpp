@@ -496,7 +496,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					double e_o = eps_m;
 
 					eps_crb = setCreepBasicStrain(t, sig, e_o);
-					eps_crd = setCreepDryingStrain(t, sig, e_o);//deci
+					//eps_crd = setCreepDryingStrain(t, sig, e_o);//deci
 
 				}
 
