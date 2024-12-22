@@ -370,7 +370,7 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 	//cout << "\n	         tmtp: " << tmtp << ".";//deci
 	
 	
-	double phiBasic = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) + (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5)));
+	double phiBasic = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14)) ); //+ (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5))
 	return phiBasic;
 }
 //ntosic
@@ -495,7 +495,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					//cout << "\n        PATH 1"; //deci
 					double e_o = eps_m;
 
-					//eps_crb = setCreepBasicStrain(t, sig, e_o);
+					eps_crb = setCreepBasicStrain(t, sig, e_o);
 					eps_crd = setCreepDryingStrain(t, sig, e_o);//deci
 
 				}
