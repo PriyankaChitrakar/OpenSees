@@ -366,7 +366,7 @@ TDConcreteMC10NL::setEta(double time, double tp)
 {
 	// Priyanka: Eta for Secondary Creep
 	double tmtp = time - TIME_i[2];
-	cout << "\n	         TIME_i[2]: " << TIME_i[2] << ".";
+	//cout << "\n	         TIME_i[2]: " << TIME_i[2] << ".";
 	double eta = pow(1.0 - log10(tmtp / (100.0 + tmtp)), 0.75);
 	return eta;
 }
