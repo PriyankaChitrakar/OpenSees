@@ -299,6 +299,8 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 {
 	double creepDrying;
 	double runSum = 0.0;
+	double runSumA = 0.0;
+	double runSumB = 0.0;
 	double runSumStress = 0.0;
 	double ShortTimeStrain = 0.0; //Priyanka
 
@@ -310,11 +312,11 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 		PHID_i[i] = setPhiDrying(time, TIME_i[i]); //Determine PHI //ntosic: PHID
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//runSumStress += DSIG_i[i]; // Priyanka: Added for Secondary Creep
-		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
+		STS_i[i] = setShortTimeStrain(SIG_i[i]); //Priyanka: 20241222
 
 		if (eo < cem * 1.0) //phibb=k=1 2 of 7
 		{
-			ShortTimeStrain = 0.0;
+			STS_i[i] = 0.0; //Priyanka: 20241222
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
 		} //Priyanka
 
@@ -323,7 +325,11 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 
 		double x = 2.6;
 		double y = 2.6;
-		runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 0.7 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 2));
+		runSumA += (PHID_i[i] * STS_i[i]) * (1 + 0.7 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 2));//Priyanka: 20241222
+		if (i > 1.0)
+		{
+			runSumB += (PHID_i[i] * STS_i[i - 1]) * (1 + 0.7 * eta_i[i - 1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 2));//Priyanka: 20241222
+		}
 		//runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 * a_i[i])), 4) * (x - y * stress / fc / (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 		//runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 )), 4) * (2 - 1.8 * stress / fc / (1 + 0.1))); //Priyanka: Edited for		
 		//runSum += (PHID_i[i] * DSIG_i[i] / Ecm);
@@ -332,7 +338,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 	}
 
 	phid_i = PHID_i[count];
-	creepDrying = runSum;
+	creepDrying = runSumA - runSumB;//Priyanka: 20241222
 	//creepDrying = 0.0;
 	///cout << "\n	         creepDrying: " << creepDrying << ".";
 	return creepDrying;
