@@ -197,6 +197,8 @@ class TDConcreteMC10NL : public UniaxialMaterial //ntosic: changed name
     float PHIB_i[5000]; //ntosic: split into basic and drying creep
 	float PHID_i[5000]; //ntosic: split into basic and drying creep
     float E_i[5000];
+    float STS_i[5000]; //Priyanka: 20241222
+    float SIG_i[5000]; //Priyanka: 20241222
     float DSIG_i[5000];
     float dsig_i[5000];
     float TIME_i[5000]; //Time from the previous time step

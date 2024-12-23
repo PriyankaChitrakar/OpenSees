@@ -236,9 +236,10 @@ double
 TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 {
 	double creepBasic;
-	double runSum = 0.0;
+	double runSumA = 0.0;
+	double runSumB = 0.0;
 	double runSumStress = 0.0;
-	double ShortTimeStrain = 0.0; //Priyanka
+	//double ShortTimeStrain = 0.0; //Priyanka: 20241222 
 
 	//cout << "\n	         setCreepBasicStrain----------------------------------------------";//deci
 
@@ -257,13 +258,13 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//cout << "\n          eta_i[" << i << "]: " << eta_i[i] << ".";
 		//cout << "\n          DSIG_i[" << i << "]: " << DSIG_i[i] << ".";//deci
-		ShortTimeStrain = setShortTimeStrain(DSIG_i[i]); //Priyanka
+		STS_i[i] = setShortTimeStrain(SIG_i[i]); //Priyanka: 20241222
 
 
 		//#cout << "\n	         eo: " << eo << ".";
 		if (eo < cem * 1.0) //phibb=k=1 / 1 of 7
 		{
-			ShortTimeStrain = 0.0;
+			STS_i[i] = 0.0; //Priyanka: 20241222
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
 		} //Priyanka
 
@@ -276,14 +277,18 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		double x = 2.6;
 		double y = 2.6;
-		runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 0.7 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 2));// //deci
+		runSumA += (PHIB_i[i] * STS_i[i]) * (1 + 0.7 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 2));//Priyanka: 20241222
+		if (i > 1.0) 
+		{
+			runSumB += (PHIB_i[i] * STS_i[i - 1]) * (1 + 0.7 * eta_i[i - 1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 2));//Priyanka: 20241222
+		}
 		//runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 4) * (x - y * stress / fc / (1 + 0.1))); //Priyanka: Edited for ///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		//runSum += PHIB_i[i] * DSIG_i[i] / Ecm;//deci
 		//cout << "\n	                      runSumBasic: " << runSum << ".";	//deci
 	}
 
 	phib_i = PHIB_i[count];
-	creepBasic = runSum;
+	creepBasic = runSumA - runSumB ;
 	//#cout << "\n	         creepBasic: " << creepBasic << ".";
 	return creepBasic;
 
