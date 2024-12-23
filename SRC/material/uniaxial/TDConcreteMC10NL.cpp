@@ -703,6 +703,7 @@ TDConcreteMC10NL::commitState(void)
 	//} else { //concrete is uncracked, DSIG = sig - sigP
 	//	DSIG_i[count+1] = sig-sigP;
 	//}
+	SIG_i[count + 1] = sig; //Priyanka: 20241222
 	DSIG_i[count + 1] = sig - sigP;
 	Deps_m_i[count + 1] = eps_m - epsP_m;
 	eps_m_i[count + 1] = eps_m;
