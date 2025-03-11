@@ -277,7 +277,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		double x = 2.6;
 		double y = 2.6;
-		runSumA += (PHIB_i[i] * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+		runSumA += (PHIB_i[i]*beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
 		if (i > 1.0) 
 		{
 			runSumB += (PHIB_i[i] * STS_i[i - 1]) * (1 + 1.3 * eta_i[i-1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
@@ -325,7 +325,7 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 
 		double x = 2.6;
 		double y = 2.6;
-		runSumA += (PHID_i[i] * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+		runSumA += (PHID_i[i] * beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
 		if (i > 1.0)
 		{
 			runSumB += (PHID_i[i] * STS_i[i - 1]) * (1 + 1.3 * eta_i[i-1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
