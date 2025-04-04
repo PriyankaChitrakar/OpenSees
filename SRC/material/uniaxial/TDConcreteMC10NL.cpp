@@ -277,10 +277,12 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		double x = 2.6;
 		double y = 2.6;
-		runSumA += (PHIB_i[i] * beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+		//runSumA += (PHIB_i[i] * beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+		runSumA += (PHIB_i[i] * beta * STS_i[i]);//Priyanka: 20250404 Linear only
 		if (i > 1.0) 
 		{
-			runSumB += (PHIB_i[i] * beta * STS_i[i - 1]) * (1 + 1.3 * eta_i[i-1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+			//runSumB += (PHIB_i[i] * beta * STS_i[i - 1]) * (1 + 1.3 * eta_i[i-1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+			runSumB += (PHIB_i[i] * beta * STS_i[i - 1]) ;//Priyanka: 20250404 Linear only
 		}
 		//runSum += (PHIB_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1)), 4) * (x - y * stress / fc / (1 + 0.1))); //Priyanka: Edited for ///runSum += (PHIB_i[i] * DSIG_i[i] / Ecm);
 		//runSum += PHIB_i[i] * DSIG_i[i] / Ecm;//deci
@@ -325,10 +327,12 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 
 		double x = 2.6;
 		double y = 2.6;
-		runSumA += (PHID_i[i] * beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+		runSumA += (PHID_i[i] * beta * STS_i[i]) ;//Priyanka: 20250404 Linear only
+		//runSumA += (PHID_i[i] * beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
 		if (i > 1.0)
 		{
-			runSumB += (PHID_i[i] * beta * STS_i[i - 1]) * (1 + 1.3 * eta_i[i-1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
+			runSumB += (PHID_i[i] * beta * STS_i[i - 1]) ;//Priyanka: 20250404 Linear only
+			//runSumB += (PHID_i[i] * beta * STS_i[i - 1]) * (1 + 1.3 * eta_i[i - 1] * pow((SIG_i[i - 1] / fc / (1 + 0.1)), 4));//Priyanka: 20241222
 		}
 		//runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 * a_i[i])), 4) * (x - y * stress / fc / (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep //CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi drying)
 		//runSum += (PHID_i[i] * ShortTimeStrain) * (1 + 2 * eta_i[i] * pow((stress / fc / (1 + 0.1 )), 4) * (2 - 1.8 * stress / fc / (1 + 0.1))); //Priyanka: Edited for		
