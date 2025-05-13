@@ -261,8 +261,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		STS_i[i] = setShortTimeStrain(SIG_i[i]); //Priyanka: 20241222
 
 
-		//#cout << "\n	         eo: " << eo << ".";
-		
+		//#cout << "\n	         eo: " << eo << ".";		
 		if (eo < cem * 1.0) //phibb=k=1 / 1 of 7
 		{
 			STS_i[i] = 0.0; //Priyanka: 20241222
