@@ -262,13 +262,13 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 
 
 		//#cout << "\n	         eo: " << eo << ".";
-		/*
+		
 		if (eo < cem * 1.0) //phibb=k=1 / 1 of 7
 		{
 			STS_i[i] = 0.0; //Priyanka: 20241222
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
 		} //Priyanka
-		*/
+		
 
 
 		//#cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";	
@@ -316,13 +316,13 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 		eta_i[i] = setEta(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 		//runSumStress += DSIG_i[i]; // Priyanka: Added for Secondary Creep
 		STS_i[i] = setShortTimeStrain(SIG_i[i]); //Priyanka: 20241222
-		/*
+		
 		if (eo < cem * 1.0) //phibb=k=1 2 of 7
 		{
 			STS_i[i] = 0.0; //Priyanka: 20241222
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
 		} //Priyanka
-		*/
+		
 
 		a_i[i] = setValueOFa(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 
