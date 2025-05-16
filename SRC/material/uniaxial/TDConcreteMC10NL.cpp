@@ -751,7 +751,7 @@ TDConcreteMC10NL::commitState(void)
 	epsP_crb = eps_crb; //ntosic
 	epsP_crd = eps_crd; //ntosic
 	epsP_m = eps_m;
-	failure = 0;  //Priyanka- 20250515
+	//failure = 0;  //Priyanka- 20250515
 	 
 	//ntosic: strain compression limit changed to 0.4fc/Ec; Include nonlinear creep coefficient?
 	if (eps_m < 0 && fabs(eps_m)>0.40 * fabs(fc / Ec)) {
