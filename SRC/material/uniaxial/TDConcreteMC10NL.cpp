@@ -551,7 +551,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.0013333 * a - 0.002))
 
 				{
-					failure = 1
+					failure = 1;
 				}
 				if (failure==1){
 					//eps_total = ShortTimeStrainD;
