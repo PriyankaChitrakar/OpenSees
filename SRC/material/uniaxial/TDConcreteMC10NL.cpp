@@ -557,7 +557,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					//eps_total = ShortTimeStrainD;
 					//eps_total = epscu;
 					sig = fcu;
-					eps_m = 0.0;
+					//eps_m = 0.0;
 					cout << "\n        eps_total: " << eps_total << "."; //deci
 					cout << "\n        failure curve: " << ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.0013333 * a - 0.002) << "."; //deci
 					cout << "\n        failure : " << failure << "."; //deci
