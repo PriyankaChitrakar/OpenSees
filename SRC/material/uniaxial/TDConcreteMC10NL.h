@@ -177,6 +177,7 @@ class TDConcreteMC10NL : public UniaxialMaterial //ntosic: changed name
 	double eps_T;
 	double eps_m;
     int failure=0; //Priyanka: 20250515
+    int failure2 = 0; //Priyanka: 20250520
 	double epsP_m;
 	double epsP_crb; //ntosic: split into basic and drying creep
 	double epsP_crd; //ntosic: split into basic and drying creep
