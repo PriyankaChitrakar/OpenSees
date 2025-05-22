@@ -525,12 +525,11 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
 				sig = setStress(eps_m, e);
-				/*
+				
 				if (failure2 == 1) 
 				{					
 					sig = fcu;					
 				}
-				*/
 
 				///cout << "\n a_i[i] : " << a_i[i] << ".";
 
