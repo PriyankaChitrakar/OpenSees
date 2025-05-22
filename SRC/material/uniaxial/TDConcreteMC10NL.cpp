@@ -491,6 +491,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				if (eps_m < cem)
 				{
 					failure2 = 1;
+					cout << "\n        failure2 : " << failure2 << "."; //deci
 				}
 
 
