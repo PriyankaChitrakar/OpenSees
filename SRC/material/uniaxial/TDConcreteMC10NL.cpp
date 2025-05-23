@@ -492,6 +492,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				{
 					failure2 = 1;
 					cout << "\n        failure2 : " << failure2 << "."; //deci
+					cout << "\n        cem : " << cem << "."; //deci
+					cout << "\n        eps_m : " << eps_m << "."; //deci
 				}
 
 
