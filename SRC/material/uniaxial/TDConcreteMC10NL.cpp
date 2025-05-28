@@ -243,8 +243,8 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 
 	//cout << "\n	         setCreepBasicStrain----------------------------------------------";//deci
 
-	cout << "\n    Stress: " << stress << ".";//deci
-	cout << "\n    Time: " << time << ".";//deci
+	//cout << "\n    Stress: " << stress << ".";//deci
+	//cout << "\n    Time: " << time << ".";//deci
 	//cout << "\n    eo: " << eo << ".";
 
 
@@ -427,9 +427,9 @@ int
 TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 {
 	loop++;
-	cout << "\nLOOP:" << loop << "-------------------------------------------------------------------------------------";//deci
+	//cout << "\nLOOP:" << loop << "-------------------------------------------------------------------------------------";//deci
 
-	cout << "\n        trialStrain: " << trialStrain << "."; //deci
+	//cout << "\n        trialStrain: " << trialStrain << "."; //deci
 	//cout << "\n          strainRate: " << strainRate << ".";
 
 	double t = getCurrentTime();
@@ -456,7 +456,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 	// Check casting age:
 	if (t - tcast < (2.0 - 0.0001)) { //Assumed that concrete can only carry load once hardened at 2 days following casting
-		cout << "\n        PATH 0"; //deci
+		//cout << "\n        PATH 0"; //deci
 		eps_crb = 0.0; //ntosic
 		eps_crd = 0.0; //ntosic
 		eps_shb = 0.0; //ntosic
@@ -480,7 +480,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		if (ops_Creep == 1) {
 			if (fabs(t - TIME_i[count]) <= 0.0001) { //If t = t(i-1), use creep/shrinkage from last calculated time step
 
-				cout << "\n        PATH 3"; //deci
+				//cout << "\n        PATH 3"; //deci
 
 				eps_crb = epsP_crb; //ntosic
 				eps_crd = epsP_crd; //ntosic
@@ -491,9 +491,9 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				if (eps_m < cem)
 				{
 					failure2 = 1;
-					cout << "\n        failure2 : " << failure2 << "."; //deci
-					cout << "\n        cem : " << cem << "."; //deci
-					cout << "\n        eps_m : " << eps_m << "."; //deci
+					//cout << "\n        failure2 : " << failure2 << "."; //deci
+					//cout << "\n        cem : " << cem << "."; //deci
+					//cout << "\n        eps_m : " << eps_m << "."; //deci
 				}
 
 
@@ -515,7 +515,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				///cout << "\n          iter: " << iter << ".";
 				if (iter < 1) {
 
-					cout << "\n        PATH 1"; //deci
+					//cout << "\n        PATH 1"; //deci
 					double e_o = eps_m;
 
 					eps_crb = setCreepBasicStrain(t, sig, e_o);
@@ -523,7 +523,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				}
 
-				cout << "\n        PATH 2"; //deci
+				//cout << "\n        PATH 2"; //deci
 				//#cout << "\n        previous eps_m: " << eps_m << ".";
 
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
@@ -568,9 +568,9 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					//eps_total = epscu;
 					sig = fcu;
 					//eps_m = 0.0;
-					cout << "\n        eps_total: " << eps_total << "."; //deci
-					cout << "\n        failure curve: " << ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.002) << "."; //deci
-					cout << "\n        failure : " << failure << "."; //deci
+					//cout << "\n        eps_total: " << eps_total << "."; //deci
+					//cout << "\n        failure curve: " << ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.002) << "."; //deci
+					//cout << "\n        failure : " << failure << "."; //deci
 				}
 			
 				//}
@@ -584,7 +584,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 			eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd; //ntosic
 			sig = setStress(eps_m, e);
 
-			cout << "\n        PATH 4"; //deci
+			//cout << "\n        PATH 4"; //deci
 		}
 		//
 		//opserr<<"\n   eps_cr = "<<eps_cr;
@@ -592,10 +592,10 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 		//opserr<<"\n   eps_m = "<<eps_m;
 		//opserr<<"\n   sig = "<<sig;
 	}
-	cout << "\n        eps_m: " << eps_m << "."; //deci
-	cout << "\n        sig: " << sig << "."; //deci
-	cout << "\n		   eps_total: " << eps_total << ".";//deci
-	cout << "\n        iter: " << iter << ".";//deci
+	//cout << "\n        eps_m: " << eps_m << "."; //deci
+	//cout << "\n        sig: " << sig << "."; //deci
+	//cout << "\n		   eps_total: " << eps_total << ".";//deci
+	//cout << "\n        iter: " << iter << ".";//deci
 	iter++;
 	return 0;
 }
