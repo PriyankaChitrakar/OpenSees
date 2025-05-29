@@ -262,12 +262,12 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 
 
 		//#cout << "\n	         eo: " << eo << ".";		
-		/*if (eo < cem * 1.0) //phibb=k=1 / 1 of 7
+		if (eo < cem * 1.0) //phibb=k=1 / 1 of 7
 		{
 			STS_i[i] = 0.0; //Priyanka: 20241222
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
 		} //Priyanka
-		*/
+		
 
 
 		//#cout << "\n	     ShortTimeStrain: " << ShortTimeStrain << ".";	
@@ -316,12 +316,12 @@ TDConcreteMC10NL::setCreepDryingStrain(double time, double stress, double eo)
 		//runSumStress += DSIG_i[i]; // Priyanka: Added for Secondary Creep
 		STS_i[i] = setShortTimeStrain(SIG_i[i]); //Priyanka: 20241222
 		
-		/* if (eo < cem * 1.0) //phibb=k=1 2 of 7
+		 if (eo < cem * 1.0) //phibb=k=1 2 of 7
 		{
 			STS_i[i] = 0.0; //Priyanka: 20241222
 			//#cout << "\n          Deps_m_i[" << i << "]: " << Deps_m_i[i] << ".";
 		} //Priyanka
-		 */
+		 
 
 		a_i[i] = setValueOFa(time, TIME_i[i]); // Priyanka: Added for Secondary Creep
 
@@ -528,6 +528,17 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
 				sig = setStress(eps_m, e);
+
+				if (eps_m < cem) //20250528
+				{ 
+					if (eps_crb + eps_crd == 0)
+					{ 
+					failure2 = 1;
+					//cout << "\n        failure2 : " << failure2 << "."; //deci
+					//cout << "\n        cem : " << cem << "."; //deci
+					//cout << "\n        eps_m : " << eps_m << "."; //deci
+					}
+				}
 				
 				if (failure2 == 1) 
 				{					
