@@ -518,6 +518,15 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					//cout << "\n        PATH 1"; //deci
 					double e_o = eps_m;
 
+					if (e_o < cem * 1.0) //20250528
+					{
+						failure2 = 1;
+						//cout << "\n        failure2 : " << failure2 << "."; //deci
+						//cout << "\n        cem : " << cem << "."; //deci
+						//cout << "\n        eps_m : " << eps_m << "."; //deci
+
+					}
+
 					eps_crb = setCreepBasicStrain(t, sig, e_o);
 					eps_crd = setCreepDryingStrain(t, sig, e_o);//deci
 
@@ -529,17 +538,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
 				sig = setStress(eps_m, e);
 
-				if (eps_m < cem) //20250528
-				{ 
-					if (eps_crb + eps_crd == 0)
-					{ 
-					failure2 = 1;
-					//cout << "\n        failure2 : " << failure2 << "."; //deci
-					//cout << "\n        cem : " << cem << "."; //deci
-					//cout << "\n        eps_m : " << eps_m << "."; //deci
-					}
-				}
-				
+							
 				if (failure2 == 1) 
 				{					
 					sig = fcu;					
