@@ -198,6 +198,8 @@ class TDConcreteMC10 : public UniaxialMaterial //ntosic: changed name
     float TIME_i[5000]; //Time from the previous time step
     float DTIME_i[5000];
     float kappa[5000];
+
+    double loop = 0; //Priyanka: for Secondary Creep
 };
 
 
