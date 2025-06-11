@@ -234,8 +234,8 @@ TDConcreteMC10::setCreepBasicStrain(double time, double stress)
     double creepBasic;
     double runSum = 0.0;
 
-	cout << "\n    Stress: " << stress << ".";//deci
-	cout << "\n    Time: " << time << ".";//deci
+	//cout << "\n    Stress: " << stress << ".";//deci
+	//cout << "\n    Time: " << time << ".";//deci
     
     DTIME_i[count] = ops_Dt;
  
