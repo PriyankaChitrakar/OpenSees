@@ -538,10 +538,11 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
 				sig = setStress(eps_m, e);
 															
-				if (failure2 == 1) 
+				/*if (failure2 == 1)  ///Priyanka-2025-07-02--deactivating sudden drop of concrete stress in failure curve 2.
 				{					
 					sig = fcu;					
-				}
+				}*/
+
 
 				///cout << "\n a_i[i] : " << a_i[i] << ".";
 
@@ -566,8 +567,8 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				// Priyanka: for Secondary Creep
 
 				///cout << "\n      ShortTimeStrainD: " << ShortTimeStrainD << ".";
-				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.0013333 * a - 0.002))
-					//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.002))
+				//if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.0013333 * a - 0.002))
+				if (eps_total < ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.002))
 
 				{
 					failure = 1;
