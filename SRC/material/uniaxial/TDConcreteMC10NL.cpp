@@ -385,8 +385,9 @@ TDConcreteMC10NL::setPhiBasic(double time, double tp)
 	//cout << "\n	         tp: " << tp << ".";//deci
 	//cout << "\n	         tmtp: " << tmtp << ".";//deci
 	
-	double ageFactor = (-tp + 328) / 90;
-	if (tp > 238) { ageFactor = 1.0; }
+	double ageFactor = 0.7;
+	if (tp <= 240) { ageFactor = (330 - tp) / 90; }
+	if (240 < tp < 720) { ageFactor = (1796 - tp)/1556; }
 	double phiBasic = ageFactor *(Ec / Ecm) *(pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * ((2 * pow(tmtp, 0.3) / ((pow(tmtp, 0.3)) + 14))+ (pow(7 / tp, 0.5) * pow(tmtp / (tmtp + 7), 0.5))); //
 	return phiBasic;
 }
@@ -398,8 +399,11 @@ TDConcreteMC10NL::setPhiDrying(double time, double tp)
 	double tmtp = time - tp;
 	//double phiDrying = (Ec / Ecm) * (pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * pow(tmtp / (tmtp + phidb), 0.5));
 
-	double ageFactor = (-tp + 328) / 90;
-	if (tp > 238) { ageFactor = 1.0; }
+	//double ageFactor = (-tp + 328) / 90;
+	//if (tp > 238) { ageFactor = 1.0; }
+	double ageFactor = 0.7;
+	if (tp <= 240) { ageFactor = (330 - tp) / 90; }
+	if (240 < tp < 720) { ageFactor = (1796 - tp) / 1556; }
 	double phiDrying = ageFactor * (Ec / Ecm)*(pow(1 - pow(((tp - phiba) / (tp - phiba + phidb)), 0.5), 0.5)) * (phida * pow(tmtp, 0.5) / pow(tmtp + phidb, 0.5));
 	///cout << "\n	         phiDrying: " << phiDrying << ".";
 	return phiDrying;
