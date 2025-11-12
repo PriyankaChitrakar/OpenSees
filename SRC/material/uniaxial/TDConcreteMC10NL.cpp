@@ -571,6 +571,16 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 				{
 					a = 1;
 				}
+				//Reactivating failure curve //2025-11-11
+				if (eps_total < ShortTimeStrainD)
+					{failure = 1;}
+
+				if (failure == 1) {
+					eps_m = eps_total;
+					sig = setStress(eps_m, e);
+				}
+
+
 				//cout << "\n          a: " << a << ".";//Priyanka
 				// Priyanka: for Secondary Creep
 
@@ -591,9 +601,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 					//cout << "\n        eps_total: " << eps_total << "."; //deci
 					//cout << "\n        failure curve: " << ((ShortTimeStrainD + 0.002) * (2.137 * a + 1) - 0.002) << "."; //deci
 					//cout << "\n        failure : " << failure << "."; //deci
-				}
-				
-				
+				}						
 				*/
 			
 				//}
