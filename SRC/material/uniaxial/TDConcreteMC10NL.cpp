@@ -277,7 +277,7 @@ TDConcreteMC10NL::setCreepBasicStrain(double time, double stress, double eo)
 		//runSum += (PHIB_i[i]* ShortTimeStrain)*(1+2*eta_i[i]*pow((stress/fc/ (1 + 0.1 * a_i[i])),4)*(2-1.8*stress / fc/ (1 + 0.1 * a_i[i]))); //Priyanka: Edited for Secondary Creep//CONSTANT STRESS within Time interval //ntosic: changed to Ecm from Ec (according to Model Code formulation of phi basic)
 		double x = 2.6;
 		double y = 2.6;
-		runSumA += (PHIB_i[i] * beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1 * a_i[i])), 4));//Priyanka: 20241222
+		runSumA += 100*(PHIB_i[i] * beta * STS_i[i]) * (1 + 1.3 * eta_i[i] * pow((SIG_i[i] / fc / (1 + 0.1 * a_i[i])), 4));//Priyanka: 20241222// to check, going to revert back
 		//runSumA += (PHIB_i[i] * beta * STS_i[i]);//Priyanka: 20250404 Linear only
 		if (i > 1.0) 
 		{
