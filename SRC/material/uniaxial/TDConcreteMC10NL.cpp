@@ -542,6 +542,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				//cout << "\n        PATH 2"; //deci
 				//#cout << "\n        previous eps_m: " << eps_m << ".";
+				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
 
 				eps_m = eps_total - eps_crb - eps_crd - eps_shb - eps_shd;  //ntosic
 				sig = setStress(eps_m, e);
@@ -554,7 +555,7 @@ TDConcreteMC10NL::setTrialStrain(double trialStrain, double strainRate)
 
 				///cout << "\n a_i[i] : " << a_i[i] << ".";
 
-				ShortTimeStrainD = setShortTimeStrainD(sig); //Priyanka
+				
 				///cout << "\n      eps_total: " << eps_total << ".";
 				int i = 1;//Priyanka
 				//cout << "\n          TIME_i[" << i << "]: " << TIME_i[i] << ".";//Priyanka
